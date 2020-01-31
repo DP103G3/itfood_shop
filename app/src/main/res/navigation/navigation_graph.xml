@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/mainOrderFragment">
+
+    <fragment
+        android:id="@+id/mainOrderFragment"
+        android:name="tw.dp103g3.itfood_shop.order.MainOrderFragment"
+        android:label="fragment_main_order"
+        tools:layout="@layout/fragment_main_order" />
+    <fragment
+        android:id="@+id/commentFragment"
+        android:name="tw.dp103g3.itfood_shop.CommentFragment"
+        android:label="fragment_comment"
+        tools:layout="@layout/fragment_comment" />
+    <fragment
+        android:id="@+id/statsFragment"
+        android:name="tw.dp103g3.itfood_shop.StatsFragment"
+        android:label="fragment_stats"
+        tools:layout="@layout/fragment_stats" />
+    <fragment
+        android:id="@+id/personFragment"
+        android:name="tw.dp103g3.itfood_shop.PersonFragment"
+        android:label="fragment_person"
+        tools:layout="@layout/fragment_person" />
+</navigation>

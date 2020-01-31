@@ -1,3 +1,45 @@
 <resources>
     <string name="app_name">itfood_shop</string>
+    <string name="textOrder">訂單</string>
+    <string name="textComment">評論</string>
+    <string name="textStats">營收統計</string>
+    <string name="textPerson">店家資料</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="textUnconfirmed">未接單</string>
+    <string name="textUncomplete">未完成</string>
+    <string name="textPickUp">待取餐</string>
+    <string name="textNoOrder">目前沒訂單喔～\n休息一下吧！</string>
+    <string name="textSelfPick">自取</string>
+    <string name="textTakeOut">外送</string>
+    <string name="textNoNetWork">no network connection available</string>
+    <string name="textOrderTime">下單時間：</string>
+    <string name="textOrderIdeal">預計送達時間：</string>
+    <string name="textOrderDelivery">訂單完成時間：</string>
+    <string name="textCancel">取消</string>
+    <string name="textScanQRCode">掃描QR Code</string>
+    <string name="textOrderTotal">訂單金額：</string>
+    <string name="textConfirmed">接單</string>
+    <string name="textComplete">完成訂單</string>
+    <string name="textPickHint">掃描QR code確認取餐</string>
+    <string name="textPickSuccess">取餐成功</string>
+    <string name="textPickFail">取餐失敗</string>
+    <string-array name="textOrderType">
+        <item>自取</item>
+        <item>外送</item>
+    </string-array>
+    <string-array name="textOrderState">
+        <item>已付款，等待接單</item>
+        <item>製作中</item>
+        <item>製作完成，待取餐</item>
+        <item>運送中</item>
+        <item>已取餐</item>
+        <item>已取消訂單</item>
+    </string-array>
+    <string-array name="textTab">
+        <item>未接單</item>
+        <item>製作中</item>
+        <item>待取餐</item>
+    </string-array>
 </resources>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvDishName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:ellipsize="end"
+        android:ems="5"
+        android:singleLine="true"
+        android:textColor="@color/colorTextOnP"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="招牌鍋貼" />
+
+    <TextView
+        android:id="@+id/tvDishInfo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:ellipsize="end"
+        android:ems="4"
+        android:maxLength="8"
+        android:singleLine="true"
+        android:textColor="@color/colorTextOnP"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvDishName"
+        app:layout_constraintStart_toEndOf="@+id/tvDishName"
+        app:layout_constraintTop_toTopOf="@+id/tvDishName"
+        tools:text="10顆" />
+
+    <TextView
+        android:id="@+id/tvDishPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:ems="3"
+        android:singleLine="true"
+        android:textAlignment="viewEnd"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="$ 1,030" />
+
+    <TextView
+        android:id="@+id/tvDishCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:alpha="0.8"
+        android:ems="2"
+        android:singleLine="true"
+        app:layout_constraintBottom_toBottomOf="@+id/tvDishInfo"
+        app:layout_constraintStart_toEndOf="@+id/tvDishInfo"
+        app:layout_constraintTop_toTopOf="@+id/tvDishInfo"
+        tools:text="x1" />
+</androidx.constraintlayout.widget.ConstraintLayout>

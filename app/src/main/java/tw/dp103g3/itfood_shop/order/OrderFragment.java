@@ -4,20 +4,23 @@ package tw.dp103g3.itfood_shop.order;
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,13 +32,14 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
+import java.util.Set;
 import java.util.stream.Collectors;
 
-import tw.dp103g3.itfood_shop.Common;
+import tw.dp103g3.itfood_shop.main.Common;
 import tw.dp103g3.itfood_shop.R;
-import tw.dp103g3.itfood_shop.Url;
+import tw.dp103g3.itfood_shop.main.Url;
 import tw.dp103g3.itfood_shop.shop.Dish;
 import tw.dp103g3.itfood_shop.shop.Shop;
 import tw.dp103g3.itfood_shop.task.CommonTask;
@@ -53,6 +57,7 @@ public class OrderFragment extends Fragment {
     private List<Order> sortedOrders;
     private LinearLayout llNoItem;
     private Comparator<Order> cmp;
+    private LocalBroadcastManager broadcastManager;
 
     OrderFragment(Common.Tab tab) {
         this.tab = tab;
@@ -72,6 +77,8 @@ public class OrderFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        broadcastManager = LocalBroadcastManager.getInstance(activity);
+        registerOrderReceiver();
         llNoItem = view.findViewById(R.id.llNoItem);
         rvOrder = view.findViewById(R.id.rvOrder);
     }
@@ -140,6 +147,25 @@ public class OrderFragment extends Fragment {
         }
     }
 
+    private void registerOrderReceiver() {
+        IntentFilter orderFilter = new IntentFilter("order");
+        broadcastManager.registerReceiver(orderReceiver, orderFilter);
+    }
+
+    private BroadcastReceiver orderReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String message = intent.getStringExtra("message");
+            Order order = Common.gson.fromJson(message, Order.class);
+            Set<Order> orders = MainOrderFragment.getOrders();
+            orders.remove(order);
+            orders.add(order);
+            MainOrderFragment.setOrders(orders);
+            onResume();
+            Log.d(TAG, message);
+        }
+    };
+
     private class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHolder>{
         private Context context;
         private List<Order> orders;
@@ -188,8 +214,8 @@ public class OrderFragment extends Fragment {
                 this.order = order;
             }
 
-            private List<Order> getOrders(int shopId) {
-                List<Order> orders = new ArrayList<>();
+            private Set<Order> getOrders(int shopId) {
+                Set<Order> orders = new HashSet<>();
                 if (Common.networkConnected(activity)) {
                     String url = Url.URL + "/OrderServlet";
                     JsonObject jsonObject = new JsonObject();
@@ -199,7 +225,7 @@ public class OrderFragment extends Fragment {
                     getOrderTask = new CommonTask(url, jsonObject.toString());
                     try {
                         String jsonIn = getOrderTask.execute().get();
-                        Type listType = new TypeToken<List<Order>>(){}.getType();
+                        Type listType = new TypeToken<Set<Order>>(){}.getType();
                         orders = Common.gson.fromJson(jsonIn, listType);
                     } catch (Exception e) {
                         Log.e(TAG, e.toString());
@@ -229,7 +255,22 @@ public class OrderFragment extends Fragment {
                     Log.e(TAG, e.toString());
                 }
                 if (count == 1) {
-                    MainOrderFragment.setOrders(getOrders(MainOrderFragment.getShopId()));
+                    Set<Order> orders = MainOrderFragment.getOrders();
+                    orders.remove(order);
+                    orders.add(order);
+                    MainOrderFragment.setOrders(orders);
+                    Common.OrderType orderType = Common.OrderType.values()[order.getOrder_type()];
+                    OrderMessage orderMessageMem = new OrderMessage(order, "mem" + order.getMem_id());
+                    OrderMessage orderMessageDel = new OrderMessage(order, "del" + order.getDel_id());
+                    switch (orderType) {
+                        case DELIVERY:
+                            String delMessage = Common.gson.toJson(orderMessageDel);
+                            Common.orderWebSocketClient.send(delMessage);
+                        case SELFPICK:
+                            String memMessage = Common.gson.toJson(orderMessageMem);
+                            Common.orderWebSocketClient.send(memMessage);
+                            break;
+                    }
                     onResume();
                 }
             }
@@ -328,6 +369,19 @@ public class OrderFragment extends Fragment {
                 holder.tvDishCount.setText(textDishCount);
                 holder.tvDishPrice.setText(decimalFormat.format(price));
             }
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (editOrderTask != null) {
+            editOrderTask.cancel(true);
+            editOrderTask = null;
+        }
+        if (getOrderTask != null) {
+            getOrderTask.cancel(true);
+            getOrderTask = null;
         }
     }
 }

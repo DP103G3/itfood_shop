@@ -9,7 +9,11 @@
         android:id="@+id/mainOrderFragment"
         android:name="tw.dp103g3.itfood_shop.order.MainOrderFragment"
         android:label="fragment_main_order"
-        tools:layout="@layout/fragment_main_order" />
+        tools:layout="@layout/fragment_main_order" >
+        <action
+            android:id="@+id/action_mainOrderFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
     <fragment
         android:id="@+id/commentFragment"
         android:name="tw.dp103g3.itfood_shop.CommentFragment"
@@ -25,4 +29,9 @@
         android:name="tw.dp103g3.itfood_shop.PersonFragment"
         android:label="fragment_person"
         tools:layout="@layout/fragment_person" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="tw.dp103g3.itfood_shop.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
 </navigation>

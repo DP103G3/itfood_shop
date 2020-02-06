@@ -25,6 +25,13 @@
     <string name="textPickHint">掃描QR code確認取餐</string>
     <string name="textPickSuccess">取餐成功</string>
     <string name="textPickFail">取餐失敗</string>
+    <string name="textShopSide">店家端</string>
+    <string name="textEmail">E-mail</string>
+    <string name="textPassword">密碼</string>
+    <string name="textLogin">登入</string>
+    <string name="textEmailFormateError">Email 格式錯誤</string>
+    <string name="textInputEmail">請輸入Email</string>
+    <string name="textInputPassword">請輸入密碼</string>
     <string-array name="textOrderType">
         <item>自取</item>
         <item>外送</item>

@@ -1,5 +1,6 @@
 package tw.dp103g3.itfood_shop.order;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.Date;
@@ -67,6 +68,14 @@ public class Order {
 		this.order_state = order_state;
 		this.order_type = order_type;
 		this.orderDetails = orderDetails;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + order_id;
+		return result;
 	}
 
 	@Override
@@ -213,8 +222,12 @@ public class Order {
 	public void setOrderDetails(List<OrderDetail> orderDetails) {
 		this.orderDetails = orderDetails;
 	}
-	
-	
+
+	@NonNull
+	@Override
+	public String toString() {
+		return getOrder_id() + " + " + getOrder_state();
+	}
 	
 	
 

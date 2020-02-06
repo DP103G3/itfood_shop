@@ -1,4 +1,4 @@
-package tw.dp103g3.itfood_shop;
+package tw.dp103g3.itfood_shop.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import tw.dp103g3.itfood_shop.R;
 import tw.dp103g3.itfood_shop.shop.Shop;
 
 public class MainActivity extends AppCompatActivity {

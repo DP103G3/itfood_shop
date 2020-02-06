@@ -1,25 +1,27 @@
 package tw.dp103g3.itfood_shop.order;
 
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
-import androidx.viewpager2.widget.ViewPager2;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -31,18 +33,16 @@ import com.google.zxing.integration.android.IntentResult;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-import tw.dp103g3.itfood_shop.Common;
+import tw.dp103g3.itfood_shop.main.Common;
 import tw.dp103g3.itfood_shop.R;
-import tw.dp103g3.itfood_shop.Url;
+import tw.dp103g3.itfood_shop.main.Url;
 import tw.dp103g3.itfood_shop.shop.Shop;
 import tw.dp103g3.itfood_shop.task.CommonTask;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class MainOrderFragment extends Fragment {
     private static final String TAG = "TAG_MainOrderFragment";
     private FragmentActivity activity;
@@ -51,29 +51,54 @@ public class MainOrderFragment extends Fragment {
     private TabLayout tabLayout;
     private ViewPager2 viewPager2;
     private static int shopId;
-    private static List<Order> orders;
-    private CommonTask getOrderTask, editOrderTask;
+    private static Set<Order> orders;
+    private CommonTask getOrderTask, editOrderTask, loginTask;
     private ImageButton ibScanQRCode;
+    private LocalBroadcastManager broadcastManager;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = getActivity();
-        SharedPreferences pref = activity.getSharedPreferences(Common.PREFERENCES_SHOP, Context.MODE_PRIVATE);
-        shopId = pref.getInt("shopId", 0);
-        shopId = 3;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_main_order, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        Common.connectServer(activity, Common.getShopId(activity));
+//        broadcastManager = LocalBroadcastManager.getInstance(activity);
+//        registerOrderReceiver();
         navController = Navigation.findNavController(view);
+        SharedPreferences pref = activity.getSharedPreferences(Common.PREFERENCES_SHOP, Context.MODE_PRIVATE);
+        String email = pref.getString("email", null);
+        String password = pref.getString("password", null);
+        if (email != null && password != null) {
+            String url = Url.URL + "/ShopServlet";
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("action", "login");
+            jsonObject.addProperty("email", email);
+            jsonObject.addProperty("password", password);
+            loginTask = new CommonTask(url, jsonObject.toString());
+            shopId = 0;
+            try {
+                String result = loginTask.execute().get();
+                shopId = Integer.parseInt(result);
+            } catch (Exception e) {
+                Log.e(TAG, e.toString());
+            }
+            if (shopId == 0) {
+                navController.navigate(R.id.action_mainOrderFragment_to_loginFragment);
+                return;
+            }
+        } else {
+            navController.navigate(R.id.action_mainOrderFragment_to_loginFragment);
+            return;
+        }
         ibScanQRCode = view.findViewById(R.id.ibScanQRCode);
         ibScanQRCode.setOnClickListener(this::scanQRCode);
         tabLayout = view.findViewById(R.id.tabLayout);
@@ -85,20 +110,16 @@ public class MainOrderFragment extends Fragment {
         viewPager2.setOffscreenPageLimit(1);
     }
 
-    static void setOrders(List<Order> orders) {
+    static void setOrders(Set<Order> orders) {
         MainOrderFragment.orders = orders;
     }
 
-    static List<Order> getOrders() {
+    static Set<Order> getOrders() {
         return MainOrderFragment.orders;
     }
 
-    static int getShopId() {
-        return MainOrderFragment.shopId;
-    }
-
-    private List<Order> getOrders(int shopId) {
-        List<Order> orders = new ArrayList<>();
+    private Set<Order> getOrders(int shopId) {
+        Set<Order> orders = new HashSet<>();
         if (Common.networkConnected(activity)) {
             String url = Url.URL + "/OrderServlet";
             JsonObject jsonObject = new JsonObject();
@@ -108,7 +129,7 @@ public class MainOrderFragment extends Fragment {
             getOrderTask = new CommonTask(url, jsonObject.toString());
             try {
                 String jsonIn = getOrderTask.execute().get();
-                Type listType = new TypeToken<List<Order>>(){}.getType();
+                Type listType = new TypeToken<Set<Order>>(){}.getType();
                 orders = Common.gson.fromJson(jsonIn, listType);
             } catch (Exception e) {
                 Log.e(TAG, e.toString());
@@ -118,6 +139,25 @@ public class MainOrderFragment extends Fragment {
         }
         return orders;
     }
+
+//    private void registerOrderReceiver() {
+//        IntentFilter orderFilter = new IntentFilter("order");
+//        broadcastManager.registerReceiver(orderReceiver, orderFilter);
+//    }
+//
+//    private BroadcastReceiver orderReceiver = new BroadcastReceiver() {
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//            String message = intent.getStringExtra("message");
+//            Order order = Common.gson.fromJson(message, Order.class);
+//            Set<Order> orders = MainOrderFragment.getOrders();
+//            orders.remove(order);
+//            orders.add(order);
+//            MainOrderFragment.setOrders(orders);
+//            viewPager2.getAdapter().notifyDataSetChanged();
+//            Log.d(TAG, message);
+//        }
+//    };
 
     private class ViewPagerAdapter extends FragmentStateAdapter {
 
@@ -175,15 +215,45 @@ public class MainOrderFragment extends Fragment {
                 Log.e(TAG, e.toString());
             }
             if (count == 1) {
-                orders.set(orders.indexOf(order), order);
+                orders.remove(order);
+                orders.add(order);
+                orders.forEach(v -> Log.d(TAG, v.toString()));
+                Common.OrderType orderType = Common.OrderType.values()[order.getOrder_type()];
+                OrderMessage orderMessageMem = new OrderMessage(order, "mem" + order.getMem_id());
+                OrderMessage orderMessageDel = new OrderMessage(order, "del" + order.getDel_id());
+                switch (orderType) {
+                    case DELIVERY:
+                        String delMessage = Common.gson.toJson(orderMessageDel);
+                        Common.orderWebSocketClient.send(delMessage);
+                    case SELFPICK:
+                        String memMessage = Common.gson.toJson(orderMessageMem);
+                        Common.orderWebSocketClient.send(memMessage);
+                        break;
+                }
                 Common.showToast(activity, R.string.textPickSuccess);
-                ViewPagerAdapter viewPagerAdapter = (ViewPagerAdapter) viewPager2.getAdapter();
-                viewPagerAdapter.notifyDataSetChanged();
             } else {
                 Common.showToast(activity, R.string.textPickFail);
             }
         } else if (!Common.networkConnected(activity)) {
             Common.showToast(activity, R.string.textNoNetWork);
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+//        broadcastManager.unregisterReceiver(orderReceiver);
+        if (getOrderTask != null) {
+            getOrderTask.cancel(true);
+            getOrderTask = null;
+        }
+        if (editOrderTask != null) {
+            editOrderTask.cancel(true);
+            editOrderTask = null;
+        }
+        if (loginTask != null) {
+            loginTask.cancel(true);
+            loginTask = null;
         }
     }
 }

@@ -255,5 +255,6 @@ public class MainOrderFragment extends Fragment {
             loginTask.cancel(true);
             loginTask = null;
         }
+        viewPager2.setAdapter(null);
     }
 }

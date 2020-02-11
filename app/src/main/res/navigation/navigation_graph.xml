@@ -21,9 +21,19 @@
         tools:layout="@layout/fragment_comment" />
     <fragment
         android:id="@+id/statsFragment"
-        android:name="tw.dp103g3.itfood_shop.StatsFragment"
+        android:name="tw.dp103g3.itfood_shop.stats.StatsFragment"
         android:label="fragment_stats"
-        tools:layout="@layout/fragment_stats" />
+        tools:layout="@layout/fragment_stats" >
+        <action
+            android:id="@+id/action_statsFragment_to_monthStatsFragment"
+            app:destination="@id/monthStatsFragment" />
+        <action
+            android:id="@+id/action_statsFragment_to_timeStatsFragment"
+            app:destination="@id/timeStatsFragment" />
+        <action
+            android:id="@+id/action_statsFragment_to_saleStatsFragment"
+            app:destination="@id/saleStatsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/personFragment"
         android:name="tw.dp103g3.itfood_shop.PersonFragment"
@@ -34,4 +44,19 @@
         android:name="tw.dp103g3.itfood_shop.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/monthStatsFragment"
+        android:name="tw.dp103g3.itfood_shop.stats.MonthStatsFragment"
+        android:label="fragment_month_stats"
+        tools:layout="@layout/fragment_month_stats" />
+    <fragment
+        android:id="@+id/timeStatsFragment"
+        android:name="tw.dp103g3.itfood_shop.stats.TimeStatsFragment"
+        android:label="fragment_time_stats"
+        tools:layout="@layout/fragment_time_stats" />
+    <fragment
+        android:id="@+id/saleStatsFragment"
+        android:name="tw.dp103g3.itfood_shop.stats.SaleStatsFragment"
+        android:label="fragment_sale_stats"
+        tools:layout="@layout/fragment_sale_stats" />
 </navigation>

@@ -32,6 +32,11 @@
     <string name="textEmailFormateError">Email 格式錯誤</string>
     <string name="textInputEmail">請輸入Email</string>
     <string name="textInputPassword">請輸入密碼</string>
+    <string name="textYear">年</string>
+    <string name="textMonth">月</string>
+    <string name="textOrderComplete">完成訂單數</string>
+    <string name="textInCome">總收入</string>
+    <string name="textOrderAvg">訂單平均金額</string>
     <string-array name="textOrderType">
         <item>自取</item>
         <item>外送</item>
@@ -48,5 +53,10 @@
         <item>未接單</item>
         <item>製作中</item>
         <item>待取餐</item>
+    </string-array>
+    <string-array name="textStats">
+        <item>月結報表</item>
+        <item>時段查詢</item>
+        <item>食品銷量</item>
     </string-array>
 </resources>

@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/commentFragment"
-        android:name="tw.dp103g3.itfood_shop.CommentFragment"
+        android:name="tw.dp103g3.itfood_shop.comment.CommentFragment"
         android:label="fragment_comment"
         tools:layout="@layout/fragment_comment" />
     <fragment

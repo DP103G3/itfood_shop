@@ -1,12 +1,15 @@
 package tw.dp103g3.itfood_shop.main;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.util.Log;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -35,6 +38,7 @@ public class Common {
     public static final String PREFERENCES_SHOP = "shop";
     public static Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
     public static OrderWebSocketClient orderWebSocketClient;
+    public static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
     public static void connectServer(Context context, int shopId) {
         URI uri = null;
@@ -84,5 +88,18 @@ public class Common {
 
     public static void showToast(Context context, int messageResId) {
         Toast.makeText(context, messageResId, Toast.LENGTH_SHORT).show();
+    }
+
+    public static void setDialogUi(Dialog dialog, Activity activity) {
+        dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+        dialog.getWindow().getDecorView().setSystemUiVisibility(activity.getWindow().getDecorView().getSystemUiVisibility());
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialogInterface) {
+                dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+                WindowManager wm = (WindowManager) activity.getSystemService(Context.WINDOW_SERVICE);
+                wm.updateViewLayout(dialog.getWindow().getDecorView(), dialog.getWindow().getAttributes());
+            }
+        });
     }
 }

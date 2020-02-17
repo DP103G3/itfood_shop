@@ -13,7 +13,9 @@
         android:usesCleartextTraffic="true"
         android:supportsRtl="true"
         android:theme="@style/ItFoodTheme">
-        <activity android:name="tw.dp103g3.itfood_shop.main.MainActivity">
+        <activity
+            android:name="tw.dp103g3.itfood_shop.main.MainActivity"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />

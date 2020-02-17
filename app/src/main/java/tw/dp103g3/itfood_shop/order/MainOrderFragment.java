@@ -1,10 +1,8 @@
 package tw.dp103g3.itfood_shop.order;
 
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,14 +29,12 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-import tw.dp103g3.itfood_shop.main.Common;
 import tw.dp103g3.itfood_shop.R;
+import tw.dp103g3.itfood_shop.main.Common;
 import tw.dp103g3.itfood_shop.main.Url;
 import tw.dp103g3.itfood_shop.shop.Shop;
 import tw.dp103g3.itfood_shop.task.CommonTask;
@@ -255,6 +251,8 @@ public class MainOrderFragment extends Fragment {
             loginTask.cancel(true);
             loginTask = null;
         }
-        viewPager2.setAdapter(null);
+        if (viewPager2 != null && viewPager2.getAdapter() != null) {
+            viewPager2.setAdapter(null);
+        }
     }
 }

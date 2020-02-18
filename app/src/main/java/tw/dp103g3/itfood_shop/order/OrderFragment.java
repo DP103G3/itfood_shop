@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -30,15 +31,14 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import tw.dp103g3.itfood_shop.main.Common;
 import tw.dp103g3.itfood_shop.R;
+import tw.dp103g3.itfood_shop.main.Common;
 import tw.dp103g3.itfood_shop.main.Url;
 import tw.dp103g3.itfood_shop.shop.Dish;
 import tw.dp103g3.itfood_shop.shop.Shop;

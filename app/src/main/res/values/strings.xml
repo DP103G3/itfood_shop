@@ -37,6 +37,10 @@
     <string name="textOrderComplete">完成訂單數</string>
     <string name="textInCome">總收入</string>
     <string name="textOrderAvg">訂單平均金額</string>
+    <string name="textDay">日</string>
+    <string name="dailyTotal">每日總銷售額</string>
+    <string name="textTotal">金額</string>
+    <string name="textAmount">數量</string>
     <string-array name="textOrderType">
         <item>自取</item>
         <item>外送</item>

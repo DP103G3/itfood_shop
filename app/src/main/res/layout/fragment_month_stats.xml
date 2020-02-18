@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorBackground"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".stats.MonthStatsFragment">
 
@@ -27,14 +28,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:background="@color/colorPrimary"
-                android:src="@drawable/back"
+                app:srcCompat="@drawable/back"
                 android:scaleType="centerInside" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/tvTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/textOrder"
+                android:text="@string/textStats"
                 android:textColor="@color/colorTextOnP"
                 android:textSize="20sp"
                 app:layout_constraintStart_toEndOf="@id/ibBack"
@@ -47,6 +48,10 @@
         android:id="@+id/btTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+         android:layout_margin="16dp"
+        android:padding="8dp"
+        android:background="@color/colorSecondary"
+        android:textColor="@color/colorTextOnS"
         tools:text="@string/hello_blank_fragment" />
 
     <LinearLayout
@@ -61,6 +66,7 @@
             android:paddingTop="16dp"
             android:paddingBottom="16dp"
             android:gravity="center"
+            android:background="@drawable/border"
             android:layout_weight="1">
 
             <TextView
@@ -69,6 +75,16 @@
                 android:layout_marginBottom="40dp"
                 android:text="@string/textInCome"
                 android:textStyle="bold"
+                android:textColor="@color/colorTextOnP"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="@string/textInCome"
+                android:textStyle="bold"
+                android:textColor="@color/colorTextOnP"
                 android:textSize="16sp" />
         </LinearLayout>
 
@@ -79,6 +95,7 @@
             android:paddingTop="16dp"
             android:paddingBottom="16dp"
             android:gravity="center"
+            android:background="@drawable/border"
             android:layout_weight="1">
 
             <TextView
@@ -86,7 +103,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="40dp"
                 android:text="@string/textOrderComplete"
+                android:textColor="@color/colorTextOnP"
                 android:textStyle="bold"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="@string/textInCome"
+                android:textStyle="bold"
+                android:textColor="@color/colorTextOnP"
                 android:textSize="16sp" />
         </LinearLayout>
 
@@ -97,6 +124,7 @@
             android:paddingTop="16dp"
             android:paddingBottom="16dp"
             android:gravity="center"
+            android:background="@drawable/border"
             android:layout_weight="1">
 
             <TextView
@@ -104,8 +132,46 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="40dp"
                 android:text="@string/textOrderAvg"
+                android:textColor="@color/colorTextOnP"
                 android:textStyle="bold"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvAverage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="@string/textInCome"
+                android:textStyle="bold"
+                android:textColor="@color/colorTextOnP"
                 android:textSize="16sp" />
         </LinearLayout>
     </LinearLayout>
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rbTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/textTotal" />
+
+        <RadioButton
+            android:id="@+id/rbAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/textAmount" />
+    </RadioGroup>
+
+
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/barChart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp" />
 </LinearLayout>

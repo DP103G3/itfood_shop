@@ -50,7 +50,6 @@ public class MainOrderFragment extends Fragment {
     private static Set<Order> orders;
     private CommonTask getOrderTask, editOrderTask, loginTask;
     private ImageButton ibScanQRCode;
-    private LocalBroadcastManager broadcastManager;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -100,6 +99,13 @@ public class MainOrderFragment extends Fragment {
         tabLayout = view.findViewById(R.id.tabLayout);
         viewPager2 = view.findViewById(R.id.viewPager);
         orders = getOrders(shopId);
+        viewPager2.setAdapter(new ViewPagerAdapter(activity));
+        new TabLayoutMediator(tabLayout, viewPager2, (tab, position) ->
+                tab.setText(getResources().getTextArray(R.array.textTab)[position])).attach();
+        viewPager2.setOffscreenPageLimit(1);
+    }
+
+    public void resumeViewAdapter() {
         viewPager2.setAdapter(new ViewPagerAdapter(activity));
         new TabLayoutMediator(tabLayout, viewPager2, (tab, position) ->
                 tab.setText(getResources().getTextArray(R.array.textTab)[position])).attach();
@@ -233,6 +239,7 @@ public class MainOrderFragment extends Fragment {
         } else if (!Common.networkConnected(activity)) {
             Common.showToast(activity, R.string.textNoNetWork);
         }
+        resumeViewAdapter();
     }
 
     @Override

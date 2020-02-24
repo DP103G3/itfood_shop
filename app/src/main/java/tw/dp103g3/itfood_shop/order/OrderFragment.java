@@ -31,6 +31,7 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
@@ -190,7 +191,7 @@ public class OrderFragment extends Fragment {
         }
 
         private class OrderViewHolder extends RecyclerView.ViewHolder{
-            TextView tvShopName, tvType, tvTotal;
+            TextView tvMemberName, tvMemberPhone, tvType, tvTotal;
             Button btAction, btCancel;
             RecyclerView rvOrderDetail;
             View divider6, divider7;
@@ -198,7 +199,8 @@ public class OrderFragment extends Fragment {
 
             OrderViewHolder(@NonNull View itemView) {
                 super(itemView);
-                tvShopName = itemView.findViewById(R.id.tvShopName);
+                tvMemberName = itemView.findViewById(R.id.tvMemberName);
+                tvMemberPhone = itemView.findViewById(R.id.tvMemberPhone);
                 tvType = itemView.findViewById(R.id.tvType);
                 tvTotal = itemView.findViewById(R.id.tvTotal);
                 rvOrderDetail = itemView.findViewById(R.id.rvOrderDetail);
@@ -316,11 +318,13 @@ public class OrderFragment extends Fragment {
                     holder.btAction.setVisibility(View.GONE);
                     holder.btCancel.setVisibility(View.GONE);
             }
-            holder.tvShopName.setText(shop.getName());
+            holder.tvMemberName.setText(order.getOrder_name());
+            holder.tvMemberPhone.setText(order.getOrder_phone());
             holder.tvType.setText(textOrderType[orderType.ordinal()]);
             holder.tvTotal.setText(textOrderTtprice);
             holder.rvOrderDetail.setLayoutManager(new LinearLayoutManager(context));
-            holder.rvOrderDetail.setAdapter(new OrderDetailAdapter(context, orderDetails));
+            holder.rvOrderDetail.setAdapter(new OrderDetailAdapter(context,
+                    orderDetails == null ? new ArrayList<>() : orderDetails));
             holder.setOrder(order);
         }
 

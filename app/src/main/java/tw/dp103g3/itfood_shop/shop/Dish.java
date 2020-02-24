@@ -1,6 +1,21 @@
 package tw.dp103g3.itfood_shop.shop;
 
+import android.util.Log;
+
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.ExecutionException;
+
+import tw.dp103g3.itfood_shop.main.Common;
+import tw.dp103g3.itfood_shop.main.Url;
+import tw.dp103g3.itfood_shop.task.CommonTask;
+
 public class Dish {
+	private static final String TAG = "TAG_Dish";
 	private int id;
 	private String name;
 	private String info;

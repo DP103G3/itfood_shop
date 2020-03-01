@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@color/colorBackground"
+android:orientation="vertical"
+tools:context=".person.PersonalInfoUpdateFragment">
+
+<androidx.appcompat.widget.Toolbar
+    android:id="@+id/toolbarShopUpdate"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/colorPrimary"
+    android:minHeight="?attr/actionBarSize"
+    android:theme="?attr/actionBarTheme"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:title="@string/textPersonInfoUpdate"
+    app:titleTextColor="@color/colorTextOnP" />
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivShop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/no_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivShop">
+
+            <Button
+                android:id="@+id/btTakePicture"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/textTakePicture" />
+
+            <Button
+                android:id="@+id/btPickPicture"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/textPickPicture" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvIdTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="12dp"
+            android:text="@string/textShopIdTitle"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+        <TextView
+            android:id="@+id/tvShopId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textColor="#0000FF"
+            app:layout_constraintStart_toEndOf="@+id/tvIdTitle"
+            app:layout_constraintTop_toTopOf="@+id/tvIdTitle" />
+
+
+        <TextView
+            android:id="@+id/tvStateTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/textShopStateTitle"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/tvIdTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvIdTitle" />
+
+        <TextView
+            android:id="@+id/tvShopState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textColor="#0000FF"
+            app:layout_constraintStart_toEndOf="@+id/tvStateTitle"
+            app:layout_constraintTop_toTopOf="@+id/tvStateTitle" />
+
+
+        <TextView
+            android:id="@+id/tvJoinDateTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/textShopJoinDateTitle"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/tvStateTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvStateTitle" />
+
+        <TextView
+            android:id="@+id/tvShopJoinDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textColor="#0000FF"
+            app:layout_constraintStart_toEndOf="@+id/tvJoinDateTitle"
+            app:layout_constraintTop_toTopOf="@+id/tvJoinDateTitle" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:paddingRight="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tvJoinDateTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvJoinDateTitle">
+
+            <EditText
+                android:id="@+id/etShopName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:hint="@string/etShopName"
+                android:inputType="text"
+                android:textColor="#0000FF" />
+
+            <TextView
+                android:id="@+id/tvNameWarning"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ff0000" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textName"
+            app:layout_constraintTop_toBottomOf="@+id/textName">
+
+            <EditText
+                android:id="@+id/etShopPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:hint="@string/etShopPhone"
+                android:inputType="phone"
+                android:maxLength="10"
+                android:textColor="#0000FF" />
+
+            <TextView
+                android:id="@+id/tvPhoneWarning"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ff0000" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!--    <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textPhone"
+            app:layout_constraintTop_toBottomOf="@+id/textPhone">
+
+            <EditText
+                android:id="@+id/etShopEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:hint="@string/etShopEmail"
+                android:inputType="textEmailAddress"
+                android:textColor="#0000FF"
+                app:layout_constraintEnd_toEndOf="@+id/etShopPhone"
+                app:layout_constraintStart_toStartOf="@+id/etShopPhone"
+                app:layout_constraintTop_toBottomOf="@+id/etShopPhone" />
+
+            <TextView
+                android:id="@+id/tvEmailWarning"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ff0000"/>
+
+        </com.google.android.material.textfield.TextInputLayout>-->
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textPhone"
+            app:layout_constraintTop_toBottomOf="@+id/textPhone">
+
+            <EditText
+                android:id="@+id/etShopAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:hint="@string/etShopAddress"
+                android:inputType="text"
+                android:textColor="#0000FF" />
+
+            <TextView
+                android:id="@+id/tvAddressWarning"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ff0000" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textTax"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textAddress"
+            app:layout_constraintTop_toBottomOf="@+id/textAddress">
+
+            <EditText
+                android:id="@+id/etShopTax"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:hint="@string/etShopTax"
+                android:inputType="number"
+                android:maxLength="8"
+                android:textColor="#0000FF"
+                app:layout_constraintEnd_toEndOf="@+id/etShopAddress"
+                app:layout_constraintStart_toStartOf="@+id/etShopAddress"
+                app:layout_constraintTop_toBottomOf="@+id/etShopAddress" />
+
+            <TextView
+                android:id="@+id/tvTaxWarning"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ff0000" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textArea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textTax"
+            app:layout_constraintTop_toBottomOf="@+id/textTax">
+
+            <EditText
+                android:id="@+id/etShopArea"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:hint="@string/etShopArea"
+                android:inputType="number"
+                android:maxLength="5"
+                android:textColor="#0000FF"
+                app:layout_constraintEnd_toEndOf="@+id/etShopTax"
+                app:layout_constraintStart_toStartOf="@+id/etShopTax"
+                app:layout_constraintTop_toBottomOf="@+id/etShopTax" />
+
+            <TextView
+                android:id="@+id/tvAreaWarning"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ff0000" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textArea"
+            app:layout_constraintTop_toBottomOf="@+id/textArea">
+
+            <!--        <EditText
+                android:id="@+id/etShopInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:hint="@string/etShopInfo"
+                android:inputType="text"
+                android:textColor="#0000FF"
+                app:layout_constraintEnd_toEndOf="@+id/etShopArea"
+                app:layout_constraintStart_toStartOf="@+id/etShopArea"
+                app:layout_constraintTop_toBottomOf="@+id/etShopArea" /> -->
+
+            <EditText
+                android:id="@+id/etShopInfo"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:background="@android:drawable/edit_text"
+                android:enabled="true"
+                android:gravity="top"
+                android:hint="@string/etShopInfo"
+                android:inputType="textMultiLine"
+                android:maxLines="10"
+                android:minLines="8"
+                android:scrollbars="vertical"
+                android:textColor="#0000FF"
+                app:layout_constraintEnd_toEndOf="@+id/etShopArea"
+                app:layout_constraintStart_toStartOf="@+id/etShopArea"
+                app:layout_constraintTop_toBottomOf="@+id/etShopArea" />
+
+
+            <TextView
+                android:id="@+id/tvInfoWarning"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ff0000" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btFinishUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="72dp"
+            android:text="@string/textSend"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btCancel"
+            app:layout_constraintTop_toTopOf="@+id/btCancel" />
+
+        <Button
+            android:id="@+id/btCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/textCancel"
+            app:layout_constraintEnd_toEndOf="@+id/textInfo"
+            app:layout_constraintTop_toBottomOf="@+id/textInfo" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            app:layout_constraintEnd_toEndOf="@+id/btCancel"
+            app:layout_constraintTop_toBottomOf="@+id/btCancel" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+</LinearLayout>

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@color/colorBackground"
+android:orientation="vertical"
+tools:context=".dish.DishDetailFragment">
+
+<androidx.appcompat.widget.Toolbar
+    android:id="@+id/toolbarShopDishDetail"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/colorPrimary"
+    android:minHeight="?attr/actionBarSize"
+    android:theme="?attr/actionBarTheme"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:navigationIcon="@drawable/back"
+    app:title="餐點內容"
+    app:titleTextColor="@color/colorTextOnP" />
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:id="@+id/ivDish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:src="@drawable/no_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--       <TextView
+        android:id="@+id/tvIdTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/textDishId"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivDish" />
+
+    <TextView
+        android:id="@+id/tvDishId"
+        android:layout_width="0dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="16dp"
+        android:textColor="#0000ff"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/tvIdTitle"
+        app:layout_constraintTop_toTopOf="@+id/tvIdTitle" /> -->
+
+        <TextView
+            android:id="@+id/tvStateTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/textDishState"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivDish" />
+
+        <TextView
+            android:id="@+id/tvDishState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textColor="#0000ff"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/tvStateTitle"
+            app:layout_constraintTop_toTopOf="@+id/tvStateTitle" />
+
+        <Switch
+            android:id="@+id/swDishState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:text=""
+            app:layout_constraintStart_toEndOf="@+id/tvStateTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvStateTitle" />
+
+        <ImageView
+            android:id="@+id/ivButton"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="@+id/swDishState"
+            app:layout_constraintEnd_toEndOf="@+id/swDishState"
+            app:layout_constraintStart_toStartOf="@+id/swDishState"
+            app:layout_constraintTop_toTopOf="@+id/swDishState" />
+
+        <TextView
+            android:id="@+id/tvNameTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/textDishName"
+            app:layout_constraintStart_toStartOf="@+id/tvStateTitle"
+            app:layout_constraintTop_toBottomOf="@+id/swDishState" />
+
+        <TextView
+            android:id="@+id/tvDishName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:textColor="#0000ff"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvNameTitle"
+            app:layout_constraintTop_toTopOf="@+id/tvNameTitle" />
+
+        <TextView
+            android:id="@+id/tvInfoTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/textDishInfo"
+            app:layout_constraintStart_toStartOf="@+id/tvNameTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvDishName" />
+
+
+        <TextView
+            android:id="@+id/tvDishInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textColor="#0000ff"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/tvInfoTitle"
+            app:layout_constraintTop_toTopOf="@+id/tvInfoTitle" />
+
+        <TextView
+            android:id="@+id/tvPriceTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/textDishPrice"
+            app:layout_constraintStart_toStartOf="@+id/tvInfoTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvInfoTitle" />
+
+        <TextView
+            android:id="@+id/tvDishPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textColor="#0000ff"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/tvPriceTitle"
+            app:layout_constraintTop_toTopOf="@+id/tvPriceTitle" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="元"
+            android:textColor="#0000ff"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/tvDishPrice"
+            app:layout_constraintTop_toTopOf="@+id/tvDishPrice" />
+
+        <Button
+            android:id="@+id/btUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:text="@string/textDishUpdate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvPriceTitle" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+
+</LinearLayout>

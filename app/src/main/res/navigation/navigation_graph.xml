@@ -36,9 +36,28 @@
     </fragment>
     <fragment
         android:id="@+id/personFragment"
-        android:name="tw.dp103g3.itfood_shop.PersonFragment"
+        android:name="tw.dp103g3.itfood_shop.person.PersonFragment"
         android:label="fragment_person"
-        tools:layout="@layout/fragment_person" />
+        tools:layout="@layout/fragment_person" >
+        <action
+            android:id="@+id/action_personFragment_to_dishFragment"
+            app:destination="@id/dishFragment" />
+        <action
+            android:id="@+id/action_personFragment_to_personalInfoFragment"
+            app:destination="@id/personalInfoFragment" />
+        <action
+            android:id="@+id/action_personFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
+        <action
+            android:id="@+id/action_personFragment_to_mainOrderFragment"
+            app:destination="@id/mainOrderFragment" />
+        <action
+            android:id="@+id/action_personFragment_to_informationFragment"
+            app:destination="@id/informationFragment" />
+        <action
+            android:id="@+id/action_personFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
+    </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="tw.dp103g3.itfood_shop.LoginFragment"
@@ -59,4 +78,64 @@
         android:name="tw.dp103g3.itfood_shop.stats.SaleStatsFragment"
         android:label="fragment_sale_stats"
         tools:layout="@layout/fragment_sale_stats" />
+    <fragment
+        android:id="@+id/dishFragment"
+        android:name="tw.dp103g3.itfood_shop.dish.DishFragment"
+        android:label="fragment_dish"
+        tools:layout="@layout/fragment_dish" >
+        <action
+            android:id="@+id/action_dishFragment_to_dishDetailFragment"
+            app:destination="@id/dishDetailFragment" />
+        <action
+            android:id="@+id/action_dishFragment_to_addDishFragment"
+            app:destination="@id/addDishFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/personalInfoFragment"
+        android:name="tw.dp103g3.itfood_shop.person.PersonalInfoFragment"
+        android:label="fragment_personal_info"
+        tools:layout="@layout/fragment_personal_info" >
+        <action
+            android:id="@+id/action_personalInfoFragment_to_personalInfoUpdateFragment"
+            app:destination="@id/personalInfoUpdateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="tw.dp103g3.itfood_shop.person.ChangePasswordFragment"
+        android:label="fragment_change_password"
+        tools:layout="@layout/fragment_change_password" />
+    <fragment
+        android:id="@+id/personalInfoUpdateFragment"
+        android:name="tw.dp103g3.itfood_shop.person.PersonalInfoUpdateFragment"
+        android:label="fragment_personal_info_update"
+        tools:layout="@layout/fragment_personal_info_update" />
+    <fragment
+        android:id="@+id/dishDetailFragment"
+        android:name="tw.dp103g3.itfood_shop.dish.DishDetailFragment"
+        android:label="fragment_dish_detail"
+        tools:layout="@layout/fragment_dish_detail" >
+        <action
+            android:id="@+id/action_dishDetailFragment_to_dishUpdateFragment"
+            app:destination="@id/dishUpdateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addDishFragment"
+        android:name="tw.dp103g3.itfood_shop.dish.AddDishFragment"
+        android:label="fragment_add_dish"
+        tools:layout="@layout/fragment_add_dish" />
+    <fragment
+        android:id="@+id/dishUpdateFragment"
+        android:name="tw.dp103g3.itfood_shop.dish.DishUpdateFragment"
+        android:label="fragment_dish_update"
+        tools:layout="@layout/fragment_dish_update" />
+    <fragment
+        android:id="@+id/informationFragment"
+        android:name="tw.dp103g3.itfood_shop.InformationFragment"
+        android:label="fragment_information"
+        tools:layout="@layout/fragment_information" />
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="tw.dp103g3.itfood_shop.AboutFragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" />
 </navigation>

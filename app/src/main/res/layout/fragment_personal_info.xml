@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@color/colorBackground"
+android:orientation="vertical"
+tools:context=".person.PersonalInfoFragment">
+
+<androidx.appcompat.widget.Toolbar
+    android:id="@+id/toolbarPersonInfo"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/colorPrimary"
+    android:minHeight="?attr/actionBarSize"
+    android:theme="?attr/actionBarTheme"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:navigationIcon="@drawable/back"
+    app:title="基本資料"
+    app:titleTextColor="@color/colorTextOnP" />
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:id="@+id/ivShop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:src="@drawable/no_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvIdTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:text="店家編號："
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivShop" />
+
+        <TextView
+            android:id="@+id/tvShopId"
+            android:layout_width="0dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="16dp"
+            android:textColor="#0000ff"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/tvIdTitle"
+            app:layout_constraintTop_toTopOf="@+id/tvIdTitle" />
+
+        <TextView
+            android:id="@+id/tvStateTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="店家狀態："
+            app:layout_constraintStart_toStartOf="@+id/tvIdTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvIdTitle" />
+
+        <TextView
+            android:id="@+id/tvShopState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textColor="#0000ff"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/tvStateTitle"
+            app:layout_constraintTop_toTopOf="@+id/tvStateTitle" />
+
+        <TextView
+            android:id="@+id/tvNameTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/textShopName"
+            app:layout_constraintStart_toStartOf="@+id/tvStateTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvStateTitle" />
+
+        <TextView
+            android:id="@+id/tvShopName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textColor="#0000ff"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/tvNameTitle"
+            app:layout_constraintTop_toTopOf="@+id/tvNameTitle" />
+
+        <TextView
+            android:id="@+id/tvPhoneTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="店家電話："
+            app:layout_constraintStart_toStartOf="@+id/tvNameTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvNameTitle" />
+
+
+        <TextView
+            android:id="@+id/tvShopPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textColor="#0000ff"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/tvPhoneTitle"
+            app:layout_constraintTop_toTopOf="@+id/tvPhoneTitle" />
+
+        <TextView
+            android:id="@+id/tvEmailTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="電子信箱："
+            app:layout_constraintStart_toStartOf="@+id/tvPhoneTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvPhoneTitle" />
+
+        <TextView
+            android:id="@+id/tvShopEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textColor="#0000ff"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/tvEmailTitle"
+            app:layout_constraintTop_toTopOf="@+id/tvEmailTitle" />
+
+
+        <TextView
+            android:id="@+id/tvJoinDateTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="加入日期："
+            app:layout_constraintStart_toStartOf="@+id/tvEmailTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvEmailTitle" />
+
+        <TextView
+            android:id="@+id/tvShopJoinDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textColor="#0000ff"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/tvJoinDateTitle"
+            app:layout_constraintTop_toTopOf="@+id/tvJoinDateTitle" />
+
+        <TextView
+            android:id="@+id/tvAddressTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="店家地址："
+            app:layout_constraintStart_toStartOf="@+id/tvJoinDateTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvJoinDateTitle" />
+
+        <TextView
+            android:id="@+id/tvShopAddress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="24dp"
+            android:textColor="#0000ff"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvAddressTitle"
+            app:layout_constraintTop_toTopOf="@+id/tvAddressTitle" />
+
+        <TextView
+            android:id="@+id/tvTaxTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="店家統編："
+            app:layout_constraintStart_toStartOf="@+id/tvAddressTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvShopAddress" />
+
+        <TextView
+            android:id="@+id/tvShopTax"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textColor="#0000ff"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/tvTaxTitle"
+            app:layout_constraintTop_toTopOf="@+id/tvTaxTitle" />
+
+        <TextView
+            android:id="@+id/tvAreaTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="店家區域："
+            app:layout_constraintStart_toStartOf="@+id/tvTaxTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvTaxTitle" />
+
+        <TextView
+            android:id="@+id/tvShopArea"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textColor="#0000ff"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/tvAreaTitle"
+            app:layout_constraintTop_toTopOf="@+id/tvAreaTitle" />
+
+        <TextView
+            android:id="@+id/tvInfoTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="店家簡介："
+            app:layout_constraintStart_toStartOf="@+id/tvAreaTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvAreaTitle" />
+
+        <TextView
+            android:id="@+id/tvShopInfo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="24dp"
+            android:textColor="#0000ff"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvInfoTitle"
+            app:layout_constraintTop_toTopOf="@+id/tvInfoTitle" />
+
+        <Button
+            android:id="@+id/btUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="80dp"
+            android:text="@string/textInfoUpdate"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvShopInfo" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
+
+</LinearLayout>

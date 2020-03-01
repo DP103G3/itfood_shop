@@ -5,6 +5,7 @@ import android.util.Log;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Optional;
@@ -14,7 +15,7 @@ import tw.dp103g3.itfood_shop.main.Common;
 import tw.dp103g3.itfood_shop.main.Url;
 import tw.dp103g3.itfood_shop.task.CommonTask;
 
-public class Dish {
+public class Dish implements Serializable {
 	private static final String TAG = "TAG_Dish";
 	private int id;
 	private String name;
@@ -41,6 +42,18 @@ public class Dish {
 		this.shop_id = shop_id;
 		this.price = price;
 	}
+
+	public void setFields(String name, String info,  int price) {
+		this.name = name;
+		this.info = info;
+		this.price = price;
+	}
+
+	public void Account(int id, byte state) {
+		this.id = id;
+		this.state = state;
+	}
+
 
 	public int getId() {
 		return id;

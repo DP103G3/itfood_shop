@@ -61,6 +61,21 @@ public class Shop implements Serializable {
 		this.ttrate = ttrate;
 	}
 
+	public void setFields(int id, String name, String phone, String address, double latitude,
+						  double longitude, String tax, int area,  String info) {
+		this.id = id;
+		this.name = name;
+		this.phone = phone;
+		this.address = address;
+		this.latitude = latitude;
+		this.longitude = longitude;
+		this.tax = tax;
+		this.area = area;
+		this.info = info;
+
+	}
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

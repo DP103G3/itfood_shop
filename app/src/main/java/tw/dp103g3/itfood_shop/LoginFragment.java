@@ -45,8 +45,6 @@ public class LoginFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = getActivity();
-
-
     }
 
     @Override
@@ -121,6 +119,12 @@ public class LoginFragment extends Fragment {
                     .putString("password", textPassword).putInt("shopId", shopId).apply();
             Navigation.findNavController(view).popBackStack();
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        bottomNavigationView.setVisibility(View.GONE);
     }
 
     @Override

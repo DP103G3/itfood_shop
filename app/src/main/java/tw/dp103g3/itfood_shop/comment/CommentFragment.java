@@ -93,7 +93,7 @@ public class CommentFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        Common.disconnectServer();
+        Common.disconnectOrderServer();
         int checkedTime = R.id.btWeek;
         rvComments = view.findViewById(R.id.rvComments);
         layoutComments = view.findViewById(R.id.layoutComments);
@@ -206,6 +206,12 @@ public class CommentFragment extends Fragment {
             comments = comments.stream().sorted(Comparator.comparing(Comment::getCmt_feedback_state).reversed()).filter(comment -> comment.getCmt_time().getTime() > calendar.getTime().getTime()).collect(Collectors.toList());
         } else if (selectedTime == ALL) {
             comments = comments.stream().sorted(Comparator.comparing(Comment::getCmt_feedback_state).reversed()).collect(Collectors.toList());
+        }
+
+        if (comments.isEmpty()) {
+            layoutNoComments.setVisibility(View.VISIBLE);
+        } else {
+            layoutNoComments.setVisibility(GONE);
         }
 
         CommentAdapter commentAdapter = (CommentAdapter) rvComments.getAdapter();

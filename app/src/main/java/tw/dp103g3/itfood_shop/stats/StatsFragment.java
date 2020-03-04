@@ -11,7 +11,6 @@ import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -46,7 +45,7 @@ public class StatsFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        Common.disconnectServer();
+        Common.disconnectOrderServer();
         navController = Navigation.findNavController(view);
         lvStats = view.findViewById(R.id.lvStats);
         String[] textStats = getResources().getStringArray(R.array.textStats);

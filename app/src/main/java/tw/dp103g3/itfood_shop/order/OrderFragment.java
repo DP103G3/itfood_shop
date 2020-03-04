@@ -19,7 +19,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -263,11 +262,11 @@ public class OrderFragment extends Fragment {
                     MainOrderFragment.setOrders(orders);
                     Common.OrderType orderType = Common.OrderType.values()[order.getOrder_type()];
                     OrderMessage orderMessageMem = new OrderMessage(order, "mem" + order.getMem_id());
-                    OrderMessage orderMessageDel = new OrderMessage(order, "del" + order.getDel_id());
                     switch (orderType) {
                         case DELIVERY:
-                            String delMessage = Common.gson.toJson(orderMessageDel);
-                            Common.orderWebSocketClient.send(delMessage);
+                            DeliveryMessage deliveryMessage = new DeliveryMessage("shopPublishOrder", order, order.getOrder_area(), "shop" + order.getShop().getId(), "");
+                            String delMessage = Common.gson.toJson(deliveryMessage, DeliveryMessage.class);
+                            Common.deliveryOrderWebSocketClient.send(delMessage);
                         case SELFPICK:
                             String memMessage = Common.gson.toJson(orderMessageMem);
                             Common.orderWebSocketClient.send(memMessage);

@@ -15,7 +15,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
@@ -65,7 +64,8 @@ public class MainOrderFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        Common.connectServer(activity, Common.getShopId(activity));
+        Common.connectOrderServer(activity, Common.getShopId(activity));
+        Common.connectDeliveryServer(activity, Common.getShopId(activity));
 //        broadcastManager = LocalBroadcastManager.getInstance(activity);
 //        registerOrderReceiver();
         navController = Navigation.findNavController(view);
@@ -261,5 +261,6 @@ public class MainOrderFragment extends Fragment {
         if (viewPager2 != null && viewPager2.getAdapter() != null) {
             viewPager2.setAdapter(null);
         }
+        Common.disconnectDeliveryServer();
     }
 }

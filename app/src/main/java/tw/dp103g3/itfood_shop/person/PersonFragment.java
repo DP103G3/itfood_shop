@@ -63,7 +63,7 @@ public class PersonFragment extends Fragment {
         //tvShopId = view.findViewById(R.id.tvShopId);
         //tvShopId.setText(String.valueOf(shopId));
         navController = Navigation.findNavController(view);
-        Common.disconnectServer();
+        Common.disconnectOrderServer();
         initListMap();
         listView = view.findViewById(R.id.listView);
         int backgroundColor = getResources().getColor(R.color.colorItemBackground, activity.getTheme());

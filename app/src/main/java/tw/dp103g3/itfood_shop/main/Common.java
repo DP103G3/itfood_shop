@@ -12,7 +12,6 @@ import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.google.gson.Gson;
@@ -21,6 +20,7 @@ import com.google.gson.GsonBuilder;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import tw.dp103g3.itfood_shop.order.DeliveryOrderWebSocketClient;
 import tw.dp103g3.itfood_shop.order.OrderWebSocketClient;
 import tw.dp103g3.itfood_shop.person.LoginDialogFragment;
 
@@ -42,12 +42,13 @@ public class Common {
     public static final String PREFERENCES_SHOP = "shop";
     public static Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
     public static OrderWebSocketClient orderWebSocketClient;
+    public static DeliveryOrderWebSocketClient deliveryOrderWebSocketClient;
     public static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
-    public static void connectServer(Context context, int shopId) {
+    public static void connectOrderServer(Context context, int shopId) {
         URI uri = null;
         try {
-            uri = new URI(Url.SOCKET_URI + shopId);
+            uri = new URI(Url.ORDER_SOCKET_URI + shopId);
         } catch (URISyntaxException e) {
             Log.e(TAG, e.toString());
         }
@@ -57,10 +58,30 @@ public class Common {
         }
     }
 
-    public static void disconnectServer() {
+    public static void disconnectOrderServer() {
         if (orderWebSocketClient != null) {
             orderWebSocketClient.close();
             orderWebSocketClient = null;
+        }
+    }
+
+    public static void connectDeliveryServer(Context context, int shopId) {
+        URI uri = null;
+        try {
+            uri = new URI(Url.DELIVERY_SOCKET_URI + shopId);
+        } catch (URISyntaxException e) {
+            Log.e(TAG, e.toString());
+        }
+        if (deliveryOrderWebSocketClient == null) {
+            deliveryOrderWebSocketClient = new DeliveryOrderWebSocketClient(uri, context);
+            deliveryOrderWebSocketClient.connect();
+        }
+    }
+
+    public static void disconnectDeliveryServer() {
+        if (deliveryOrderWebSocketClient != null) {
+            deliveryOrderWebSocketClient.close();
+            deliveryOrderWebSocketClient = null;
         }
     }
 

@@ -2,18 +2,16 @@ package tw.dp103g3.itfood_shop.person;
 
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import tw.dp103g3.itfood_shop.R;
 import tw.dp103g3.itfood_shop.main.Common;
@@ -40,7 +38,7 @@ public class AboutFragment extends Fragment {
     }
 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
-        Common.connectServer(activity, Common.getShopId(activity));
+        Common.connectOrderServer(activity, Common.getShopId(activity));
         toolbarAbout = view.findViewById(R.id.toolbarAbout);
 
         toolbarAbout.setNavigationOnClickListener(v -> Navigation.findNavController(v).popBackStack());

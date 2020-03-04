@@ -5,15 +5,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-
-import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +12,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -33,7 +31,6 @@ import tw.dp103g3.itfood_shop.shop.Shop;
 import tw.dp103g3.itfood_shop.task.CommonTask;
 
 import static tw.dp103g3.itfood_shop.main.Common.TAG;
-import static tw.dp103g3.itfood_shop.main.Common.gson;
 
 
 public class ChangePasswordFragment extends Fragment {
@@ -68,7 +65,7 @@ public class ChangePasswordFragment extends Fragment {
     }
 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
-        Common.connectServer(activity, Common.getShopId(activity));
+        Common.connectOrderServer(activity, Common.getShopId(activity));
         etObsoletePassword = view.findViewById(R.id.etObsoletePassword);
         etPassword = view.findViewById(R.id.etPassword);
         etCheckPassword = view.findViewById(R.id.etCheckPassword);

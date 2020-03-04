@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -36,6 +37,7 @@ public class LoginFragment extends Fragment {
     private BottomNavigationView bottomNavigationView;
     private EditText etEmail, etPassword;
     private Button btLogin;
+    private TextView tvShopInput;
     private String textEmail, textPassword;
     private CommonTask loginTask;
 
@@ -43,6 +45,8 @@ public class LoginFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = getActivity();
+
+
     }
 
     @Override
@@ -56,6 +60,15 @@ public class LoginFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         handledViews(view);
         bottomNavigationView.setVisibility(View.GONE);
+        tvShopInput = view.findViewById(R.id.tvShopInput);
+        //設定按下文字後輸入預設管理帳號
+        tvShopInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                etEmail.setText("abc@gmail.com");
+                etPassword.setText("987");
+            }
+        });
         etEmail.setOnFocusChangeListener((v, hasFocus) -> {
             if (!hasFocus) {
                 textEmail = etEmail.getText().toString().trim().toLowerCase();

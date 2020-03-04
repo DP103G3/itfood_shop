@@ -103,7 +103,11 @@
         android:id="@+id/changePasswordFragment"
         android:name="tw.dp103g3.itfood_shop.person.ChangePasswordFragment"
         android:label="fragment_change_password"
-        tools:layout="@layout/fragment_change_password" />
+        tools:layout="@layout/fragment_change_password" >
+        <action
+            android:id="@+id/action_changePasswordFragment_to_loginDialogFragment"
+            app:destination="@id/loginDialogFragment" />
+    </fragment>
     <fragment
         android:id="@+id/personalInfoUpdateFragment"
         android:name="tw.dp103g3.itfood_shop.person.PersonalInfoUpdateFragment"
@@ -130,12 +134,17 @@
         tools:layout="@layout/fragment_dish_update" />
     <fragment
         android:id="@+id/informationFragment"
-        android:name="tw.dp103g3.itfood_shop.InformationFragment"
+        android:name="tw.dp103g3.itfood_shop.person.InformationFragment"
         android:label="fragment_information"
         tools:layout="@layout/fragment_information" />
     <fragment
         android:id="@+id/aboutFragment"
-        android:name="tw.dp103g3.itfood_shop.AboutFragment"
+        android:name="tw.dp103g3.itfood_shop.person.AboutFragment"
         android:label="fragment_about"
         tools:layout="@layout/fragment_about" />
+    <dialog
+        android:id="@+id/loginDialogFragment"
+        android:name="tw.dp103g3.itfood_shop.person.LoginDialogFragment"
+        android:label="login_alert_dialog"
+        tools:layout="@layout/login_alert_dialog" />
 </navigation>

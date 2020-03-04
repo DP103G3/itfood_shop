@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -21,6 +22,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import tw.dp103g3.itfood_shop.order.OrderWebSocketClient;
+import tw.dp103g3.itfood_shop.person.LoginDialogFragment;
 
 public class Common {
 
@@ -82,6 +84,12 @@ public class Common {
         } else {
             return false;
         }
+    }
+
+    public static void showLoginDialog(Fragment fragment) {
+        LoginDialogFragment loginDialogFragment = new LoginDialogFragment();
+        loginDialogFragment.setTargetFragment(fragment, 0);
+        loginDialogFragment.show(fragment.getParentFragmentManager(), "LoginDialogFragment");
     }
 
     public static void showToast(Context context, String message) {

@@ -75,6 +75,10 @@ public class Shop implements Serializable {
 
 	}
 
+	public void updatePassword(int id, String password) {
+		this.id = id;
+		this.password = password;
+	}
 
 	@Override
 	public int hashCode() {

@@ -94,6 +94,7 @@ public class CommentFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         Common.disconnectOrderServer();
+        Common.disconnectDeliveryServer();
         int checkedTime = R.id.btWeek;
         rvComments = view.findViewById(R.id.rvComments);
         layoutComments = view.findViewById(R.id.layoutComments);

@@ -261,6 +261,5 @@ public class MainOrderFragment extends Fragment {
         if (viewPager2 != null && viewPager2.getAdapter() != null) {
             viewPager2.setAdapter(null);
         }
-        Common.disconnectDeliveryServer();
     }
 }

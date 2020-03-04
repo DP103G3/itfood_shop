@@ -46,6 +46,7 @@ public class StatsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         Common.disconnectOrderServer();
+        Common.disconnectDeliveryServer();
         navController = Navigation.findNavController(view);
         lvStats = view.findViewById(R.id.lvStats);
         String[] textStats = getResources().getStringArray(R.array.textStats);

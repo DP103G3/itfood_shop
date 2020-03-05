@@ -61,6 +61,21 @@ public class Shop implements Serializable {
 		this.ttrate = ttrate;
 	}
 
+	public Shop(int id, String email, String password, String name, String phone, String tax, String address,
+				int area, byte state, String info) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.password = password;
+		this.name = name;
+		this.phone = phone;
+		this.tax = tax;
+		this.address = address;
+		this.area = area;
+		this.state = state;
+		this.info = info;
+	}
+
 	public void setFields(int id, String name, String phone, String address, double latitude,
 						  double longitude, String tax, int area,  String info) {
 		this.id = id;

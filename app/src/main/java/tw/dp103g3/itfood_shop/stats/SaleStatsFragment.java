@@ -95,10 +95,12 @@ public class SaleStatsFragment extends Fragment {
             if (dishes.size() == 0) {
                 Common.showToast(activity, R.string.textNoDishesFound);
                 Navigation.findNavController(view).popBackStack();
+                return;
             }
         } else {
             Common.showToast(activity, R.string.textServerError);
             Navigation.findNavController(view).popBackStack();
+            return;
         }
         ivBack.setOnClickListener(v -> Navigation.findNavController(v).popBackStack());
         containDay = true;

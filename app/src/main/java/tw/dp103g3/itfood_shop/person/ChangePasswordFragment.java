@@ -78,6 +78,7 @@ public class ChangePasswordFragment extends Fragment {
         toolbarChangPassword.setNavigationOnClickListener(v -> Navigation.findNavController(v).popBackStack());
         navController = Navigation.findNavController(view);
 
+        showData();
 
         btSend.setOnClickListener(new View.OnClickListener() {
 
@@ -85,8 +86,8 @@ public class ChangePasswordFragment extends Fragment {
             public void onClick(View view) {
 
                 counts = 0;
-                SharedPreferences pref = activity.getSharedPreferences(Common.PREFERENCES_SHOP, Context.MODE_PRIVATE);
-                String password = pref.getString("password", null);
+
+                String password = shop.getPassword();
                 String obsoletePassword = etObsoletePassword.getText().toString().trim();
                 String newPassword = etPassword.getText().toString().trim();
                 String checkPassword = etCheckPassword.getText().toString().trim();
@@ -128,24 +129,9 @@ public class ChangePasswordFragment extends Fragment {
 
                         if (Common.networkConnected(activity)) {
 
+
                             int id = shopId;
                             String url = Url.URL + "/ShopServlet";
-                            if (Common.networkConnected(activity)) {
-                                JsonObject jsonObject = new JsonObject();
-                                Gson gson = new GsonBuilder().create();
-                                jsonObject.addProperty("action", "setShopUpDateById");
-                                jsonObject.addProperty("id", id);
-                                String jsonOut = jsonObject.toString();
-                                CommonTask getShopTask = new CommonTask(url, jsonOut);
-                                try {
-                                    String jsonIn = getShopTask.execute().get();
-                                    shop = gson.fromJson(jsonIn, Shop.class);
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                            } else {
-                                Common.showToast(activity, R.string.textNoNetwork);
-                            }
 
                             shop.updatePassword(id, newPassword);
                             JsonObject jsonObject = new JsonObject();
@@ -185,5 +171,26 @@ public class ChangePasswordFragment extends Fragment {
 
 
 
+    }
+
+    private void showData(){
+        int id = shopId;
+        String url = Url.URL + "/ShopServlet";
+        if (Common.networkConnected(activity)) {
+            JsonObject jsonObject = new JsonObject();
+            Gson gson = new GsonBuilder().create();
+            jsonObject.addProperty("action", "setShopUpDateById");
+            jsonObject.addProperty("id", id);
+            String jsonOut = jsonObject.toString();
+            CommonTask getShopTask = new CommonTask(url, jsonOut);
+            try {
+                String jsonIn = getShopTask.execute().get();
+                shop = gson.fromJson(jsonIn, Shop.class);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            Common.showToast(activity, R.string.textNoNetwork);
+        }
     }
 }

@@ -8,6 +8,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -149,7 +151,9 @@ public class OrderFragment extends Fragment {
 
     private void registerOrderReceiver() {
         IntentFilter orderFilter = new IntentFilter("order");
+        IntentFilter deliveryFilter = new IntentFilter("delivery");
         broadcastManager.registerReceiver(orderReceiver, orderFilter);
+        broadcastManager.registerReceiver(deliveryReceiver, deliveryFilter);
     }
 
     private BroadcastReceiver orderReceiver = new BroadcastReceiver() {
@@ -161,6 +165,23 @@ public class OrderFragment extends Fragment {
             orders.remove(order);
             orders.add(order);
             MainOrderFragment.setOrders(orders);
+            onResume();
+            Log.d(TAG, message);
+        }
+    };
+
+    private BroadcastReceiver deliveryReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String message = intent.getStringExtra("message");
+            Type orderSetType = new TypeToken<Set<Order>>(){}.getType();
+            Set<Order> oldOrders = MainOrderFragment.getOrders();
+            Set<Order> newOrders = Common.gson.fromJson(message, orderSetType);
+            for (Order order : newOrders) {
+                oldOrders.remove(order);
+                oldOrders.add(order);
+            }
+            MainOrderFragment.setOrders(oldOrders);
             onResume();
             Log.d(TAG, message);
         }
@@ -264,7 +285,18 @@ public class OrderFragment extends Fragment {
                     OrderMessage orderMessageMem = new OrderMessage(order, "mem" + order.getMem_id());
                     switch (orderType) {
                         case DELIVERY:
-                            DeliveryMessage deliveryMessage = new DeliveryMessage("shopPublishOrder", order, order.getOrder_area(), "shop" + order.getShop().getId(), "");
+                            DeliveryMessage deliveryMessage = null;
+                            if (order.getOrder_state() == 1) {
+                                 deliveryMessage = new DeliveryMessage("shopPublishOrder"
+                                         , order, order.getOrder_area()
+                                         , "shop" + order.getShop().getId()
+                                         , "");
+                            } else if (order.getOrder_state() == 2) {
+                                deliveryMessage =  new DeliveryMessage("shopDishDone"
+                                        , order, order.getOrder_area()
+                                        , "shop" + order.getShop().getId()
+                                        , "del" + order.getDel_id());
+                            }
                             String delMessage = Common.gson.toJson(deliveryMessage, DeliveryMessage.class);
                             Common.deliveryOrderWebSocketClient.send(delMessage);
                         case SELFPICK:
@@ -295,6 +327,7 @@ public class OrderFragment extends Fragment {
             Common.OrderType orderType = Common.OrderType.values()[order.getOrder_type()];
             String[] textOrderType = getResources().getStringArray(R.array.textOrderType);
             String textOrderTtprice = decimalFormat.format(orderTtprice);
+            int del_id = order.getDel_id();
             switch (orderState) {
                 case UNCONFIRMED:
                     holder.divider6.setVisibility(View.VISIBLE);
@@ -310,6 +343,13 @@ public class OrderFragment extends Fragment {
                     holder.btAction.setVisibility(View.VISIBLE);
                     holder.btAction.setText(getString(R.string.textComplete));
                     holder.btCancel.setVisibility(View.GONE);
+                    if (del_id == -1 && order.getOrder_type() != 0) {
+                        holder.btAction.setEnabled(false);
+                        holder.btAction.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorBackground, activity.getTheme())));
+                    } else {
+                        holder.btAction.setEnabled(true);
+                        holder.btAction.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimary, activity.getTheme())));
+                    }
                     break;
                 case PICKUP:
                     holder.divider6.setVisibility(View.GONE);

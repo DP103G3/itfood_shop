@@ -28,6 +28,7 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -163,6 +164,27 @@ public class MainOrderFragment extends Fragment {
         return order;
     }
 
+    private List<Order> getOrderByDelId(int del_id) {
+        List<Order> orders = new ArrayList<>();
+        if (Common.networkConnected(activity)) {
+            String url = Url.URL + "/OrderServlet";
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("action", "findByDeliveryId");
+            jsonObject.addProperty("del_id", del_id);
+            getOrderTask = new CommonTask(url, jsonObject.toString());
+            Type listType = new TypeToken<List<Order>>(){}.getType();
+            try {
+                String jsonIn = getOrderTask.execute().get();
+                orders = Common.gson.fromJson(jsonIn, listType);
+            } catch (Exception e) {
+                Log.e(TAG, e.toString());
+            }
+        } else {
+            Common.showToast(activity, R.string.textNoNetWork);
+        }
+        return orders;
+    }
+
 //    private void registerOrderReceiver() {
 //        IntentFilter orderFilter = new IntentFilter("order");
 //        broadcastManager.registerReceiver(orderReceiver, orderFilter);
@@ -224,12 +246,6 @@ public class MainOrderFragment extends Fragment {
                 order.setOrder_delivery(new Date());
             } else {
                 order.setOrder_state(3);
-                DeliveryMessage deliveryMessage = new DeliveryMessage("shopConfirmOrder"
-                        , order
-                        , order.getOrder_area()
-                        , "shop" + shopId, "del" + order.getDel_id());
-                String delMessage = Common.gson.toJson(deliveryMessage, DeliveryMessage.class);
-                Common.deliveryOrderWebSocketClient.send(delMessage);
             }
             String url = Url.URL + "/OrderServlet";
             JsonObject jsonObject = new JsonObject();
@@ -254,12 +270,26 @@ public class MainOrderFragment extends Fragment {
                     case DELIVERY:
                         String delMessage = Common.gson.toJson(orderMessageDel);
                         Common.orderWebSocketClient.send(delMessage);
+                        List<Order> delOrders = getOrderByDelId(order.getDel_id());
+                        Order delOrder = null;
+                        for (Order od : delOrders) {
+                            if (od.getOrder_id() == order.getOrder_id()){
+                                delOrder = od;
+                            }
+                        }
+                        DeliveryMessage deliveryMessage = new DeliveryMessage("shopConfirmOrder"
+                                , delOrder
+                                , delOrder.getShop().getArea()
+                                , "shop" + shopId, "del" + delOrder.getDel_id());
+                        String delMessageString = Common.gson.toJson(deliveryMessage, DeliveryMessage.class);
+                        Common.deliveryOrderWebSocketClient.send(delMessageString);
                     case SELFPICK:
                         String memMessage = Common.gson.toJson(orderMessageMem);
                         Common.orderWebSocketClient.send(memMessage);
                         break;
                 }
                 Common.showToast(activity, R.string.textPickSuccess);
+
             } else {
                 Common.showToast(activity, R.string.textPickFail);
             }

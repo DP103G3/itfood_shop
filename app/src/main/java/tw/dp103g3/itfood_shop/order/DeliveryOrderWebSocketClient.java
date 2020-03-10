@@ -51,7 +51,7 @@ public class DeliveryOrderWebSocketClient extends WebSocketClient {
     }
 
     private void sendMessageBroadcast(String message) {
-        Intent intent = new Intent("deliveryMessage");
+        Intent intent = new Intent("delivery");
         intent.putExtra("message", message);
         broadcastManager.sendBroadcast(intent);
     }

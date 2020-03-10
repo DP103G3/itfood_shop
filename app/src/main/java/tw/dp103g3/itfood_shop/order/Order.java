@@ -1,14 +1,13 @@
 package tw.dp103g3.itfood_shop.order;
 
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 import tw.dp103g3.itfood_shop.shop.Shop;
 
 
-public class Order implements Serializable {
+public class Order {
 	private int order_id;
 	private int del_id;
 	private Shop shop;
@@ -19,7 +18,7 @@ public class Order implements Serializable {
 	private Date order_time;
 	private Date order_ideal;
 	private Date order_delivery;
-//	private int adrs_id;
+	//	private int adrs_id;
 	private String order_name;
 	private String order_phone;
 	private int order_ttprice;
@@ -28,10 +27,10 @@ public class Order implements Serializable {
 	private List<OrderDetail> orderDetails;
 	private Address address;
 	private boolean isExpanded;
-	
+
 	public Order(Shop shop, int mem_id, int del_id, int pay_id, int sp_id, Date order_ideal, Date order_delivery,
-                 Address address, String order_name, String order_phone, int order_ttprice, int order_type,
-                 List<OrderDetail> orderDetails) {
+				 Address address, String order_name, String order_phone, int order_ttprice, int order_type,
+				 List<OrderDetail> orderDetails) {
 		super();
 		this.del_id = del_id;
 		this.shop = shop;
@@ -47,10 +46,10 @@ public class Order implements Serializable {
 		this.order_type = order_type;
 		this.orderDetails = orderDetails;
 	}
-	
-	
+
+
 //	public Order(int order_id, Shop shop, int mem_id,int del_id, int pay_id, int sp_id, Date order_ideal,
-//			Date order_time, Date order_delivery, int adrs_id, String order_name, String order_phone, int order_ttprice, 
+//			Date order_time, Date order_delivery, int adrs_id, String order_name, String order_phone, int order_ttprice,
 //			int order_area, int order_state, int order_type, List<OrderDetail> orderDetails) {
 //		super();
 //		this.order_id = order_id;
@@ -71,10 +70,10 @@ public class Order implements Serializable {
 //		this.order_type = order_type;
 //		this.orderDetails = orderDetails;
 //	}
-	
-	public Order(int order_id, Shop shop, int mem_id, int del_id, int pay_id, int sp_id, Date order_ideal,
-                 Date order_time, Date order_delivery, Address address, String order_name, String order_phone, int order_ttprice,
-                 int order_area, int order_state, int order_type, List<OrderDetail> orderDetails) {
+
+	public Order(int order_id, Shop shop, int mem_id,int del_id, int pay_id, int sp_id, Date order_ideal,
+				 Date order_time, Date order_delivery, Address address, String order_name, String order_phone, int order_ttprice,
+				 int order_area, int order_state, int order_type, List<OrderDetail> orderDetails) {
 		super();
 		this.order_id = order_id;
 		this.del_id = del_id;
@@ -275,4 +274,8 @@ public class Order implements Serializable {
 	public String toString() {
 		return getOrder_id() + " + " + getOrder_state();
 	}
+
+
+
+
 }

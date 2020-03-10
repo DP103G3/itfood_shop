@@ -30,6 +30,7 @@ import com.google.zxing.integration.android.IntentResult;
 import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import tw.dp103g3.itfood_shop.R;
@@ -203,6 +204,12 @@ public class MainOrderFragment extends Fragment {
                 order.setOrder_delivery(new Date());
             } else {
                 order.setOrder_state(3);
+                DeliveryMessage deliveryMessage = new DeliveryMessage("shopConfirmOrder"
+                        , order
+                        , order.getOrder_area()
+                        , "shop" + shopId, "del" + order.getDel_id());
+                String delMessage = Common.gson.toJson(deliveryMessage, DeliveryMessage.class);
+                Common.deliveryOrderWebSocketClient.send(delMessage);
             }
             String url = Url.URL + "/OrderServlet";
             JsonObject jsonObject = new JsonObject();

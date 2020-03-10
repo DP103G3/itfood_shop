@@ -143,6 +143,26 @@ public class MainOrderFragment extends Fragment {
         return orders;
     }
 
+    private Order getOrderByOrderId(int orderId) {
+        Order order = null;
+        if (Common.networkConnected(activity)) {
+            String url = Url.URL + "/OrderServlet";
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("action", "findByOrderId");
+            jsonObject.addProperty("order_id", orderId);
+            getOrderTask = new CommonTask(url, jsonObject.toString());
+            try {
+                String jsonIn = getOrderTask.execute().get();
+                order = Common.gson.fromJson(jsonIn, Order.class);
+            } catch (Exception e) {
+                Log.e(TAG, e.toString());
+            }
+        } else {
+            Common.showToast(activity, R.string.textNoNetWork);
+        }
+        return order;
+    }
+
 //    private void registerOrderReceiver() {
 //        IntentFilter orderFilter = new IntentFilter("order");
 //        broadcastManager.registerReceiver(orderReceiver, orderFilter);
@@ -197,8 +217,8 @@ public class MainOrderFragment extends Fragment {
         IntentResult intentResult = IntentIntegrator
                 .parseActivityResult(requestCode, resultCode, data);
         if (Common.networkConnected(activity) && intentResult != null && intentResult.getContents() != null) {
-            String orderStr = intentResult.getContents();
-            Order order = Common.gson.fromJson(orderStr, Order.class);
+            int orderId = Integer.valueOf(intentResult.getContents());
+            Order order = getOrderByOrderId(orderId);
             if (order.getOrder_type() == 0) {
                 order.setOrder_state(4);
                 order.setOrder_delivery(new Date());

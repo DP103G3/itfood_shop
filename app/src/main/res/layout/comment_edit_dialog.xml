@@ -34,6 +34,7 @@
             android:layout_height="wrap_content"
 
             android:backgroundTint="@color/zxing_transparent"
+            android:inputType="textShortMessage"
             android:lines="5" />
 
     </com.google.android.material.textfield.TextInputLayout>

@@ -125,7 +125,7 @@ public class SaleStatsFragment extends Fragment {
                 simpleDateFormat = new SimpleDateFormat("yyyy-MM", Locale.getDefault());
                 Calendar judgeDate = Calendar.getInstance();
                 judgeDate.add(Calendar.MONTH, -1);
-                if (setDate.getTimeInMillis() > judgeDate.getTimeInMillis()) {
+                if (setDate.get(Calendar.MONTH) > judgeDate.get(Calendar.MONTH)) {
                     setDate.add(Calendar.MONTH, -1);
                 }
                 setDate.set(Calendar.DAY_OF_MONTH, 1);
@@ -189,7 +189,8 @@ public class SaleStatsFragment extends Fragment {
         });
         Log.d(TAG, String.valueOf(dishStatses.size()));
         if (dishStatses.size() == 0) {
-            Common.showToast(activity, R.string.textNoOrderFound);
+            Common.showToast(activity, rgContainDay.getCheckedRadioButtonId() == R.id.rbDay ?
+                    R.string.textNoOrderFound : R.string.textMonthNoOrderFound);
         }
         rvDish.setLayoutManager(new LinearLayoutManager(activity));
         DishSaleAdapter adapter = (DishSaleAdapter) rvDish.getAdapter();
@@ -262,7 +263,7 @@ public class SaleStatsFragment extends Fragment {
         if (Common.networkConnected(activity)) {
             String url = Url.URL + "/DishServlet";
             JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("action", "getAllByShopId");
+            jsonObject.addProperty("action", "getDishByShopId");
             jsonObject.addProperty("shop_id", shopId);
             getDishesTask = new CommonTask(url, jsonObject.toString());
             try {

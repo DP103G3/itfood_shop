@@ -243,7 +243,7 @@ itfood.com.tw的所有權為itfood GmbH。 若您有任何訂餐相關問題，�
     <string name="textDeleteFail">刪除失敗，請稍後再試</string>
     <string name="textTotalTitle">營業額：</string>
     <string name="textAmountTitle">銷量：</string>
-    <string name="textNoOrderFound">當天無訂單資料</string>
+    <string name="textNoOrderFound">當日無訂單資料</string>
     <string name="textServerError">伺服器異常</string>
     <string name="textChangPassword">修改密碼</string>
     <string name="textDish">餐點管理</string>
@@ -305,5 +305,5 @@ itfood.com.tw的所有權為itfood GmbH。 若您有任何訂餐相關問題，�
     <string name="textDishNameInput">超級無敵海景佛跳牆</string>
     <string name="textDishInfoInput">一份</string>
     <string name="textDishPriceInput">9999</string>
-
+    <string name="textMonthNoOrderFound">當月無訂單資料</string>
 </resources>

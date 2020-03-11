@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.XAxis;
@@ -27,6 +28,7 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
@@ -115,7 +117,7 @@ public class MonthStatsFragment extends Fragment {
             });
 
         Description description = new Description();
-        description.setText(getString(R.string.dailyTotal));
+        description.setText("");
         description.setTextSize(20);
         description.setTextColor(getResources().getColor(R.color.colorTextOnP, activity.getTheme()));
         barChart.setDescription(description);
@@ -125,8 +127,20 @@ public class MonthStatsFragment extends Fragment {
     }
 
     private void calAndShow() {
+        if (orders.size() == 0) {
+            barChart.setVisibility(View.GONE);
+            Common.showToast(activity, R.string.textMonthNoOrderFound);
+            return;
+        }
+        barChart.setVisibility(View.VISIBLE);
         int total = orders.stream().mapToInt(Order::getOrder_ttprice).sum();
         int amount = orders.size();
+        ValueFormatter formatter = new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                return String.valueOf((int) value);
+            }
+        };
         tvTotal.setText(String.valueOf(total));
         tvAmount.setText(String.valueOf(amount));
         tvAverage.setText(amount == 0 ? "--" : String.format(Locale.getDefault(),
@@ -135,11 +149,16 @@ public class MonthStatsFragment extends Fragment {
         List<BarEntry> entries = getEntries();
 
         XAxis xAxis = barChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setAxisMaximum(entries.size() + 1);
+        xAxis.setDrawGridLines(false);
 
         YAxis yAxisLeft = barChart.getAxisLeft();
+        yAxisLeft.setAxisMinimum(0);
         yAxisLeft.setAxisMaximum((
                 float) (entries.stream().mapToDouble(BarEntry::getY).max().orElse(0) * 1.2));
+        yAxisLeft.setDrawGridLines(false);
+        yAxisLeft.setValueFormatter(formatter);
 
         YAxis yAxisRight = barChart.getAxisRight();
         yAxisRight.setEnabled(false);
@@ -148,8 +167,11 @@ public class MonthStatsFragment extends Fragment {
         barDataSet.setColor(getResources().getColor(R.color.colorSecondaryLight, activity.getTheme()));
         barDataSet.setValueTextColor(getResources().getColor(R.color.colorTextOnP, activity.getTheme()));
         barDataSet.setValueTextSize(10);
+        barDataSet.setValueFormatter(formatter);
         BarData barData = new BarData(barDataSet);
         barChart.setData(barData);
+        barChart.animateX(500, Easing.Linear);
+        barChart.animateY(1600, Easing.Linear);
         barChart.invalidate();
     }
 

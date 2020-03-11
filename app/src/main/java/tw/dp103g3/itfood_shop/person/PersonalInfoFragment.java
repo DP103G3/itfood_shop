@@ -80,7 +80,7 @@ public class PersonalInfoFragment extends Fragment {
         tvShopJoinDate = view.findViewById(R.id.tvShopJoinDate);
         tvShopAddress = view.findViewById(R.id.tvShopAddress);
         tvShopTax = view.findViewById(R.id.tvShopTax);
-        tvShopArea = view.findViewById(R.id.tvShopArea);
+        //tvShopArea = view.findViewById(R.id.tvShopArea);
         tvShopInfo = view.findViewById(R.id.tvShopInfo);
         btUpdate = view.findViewById(R.id.btUpdate);
         toolbarPersonInfo = view.findViewById(R.id.toolbarPersonInfo);

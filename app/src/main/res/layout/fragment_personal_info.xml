@@ -197,7 +197,7 @@ tools:context=".person.PersonalInfoFragment">
             android:textSize="20sp"
             app:layout_constraintStart_toEndOf="@+id/tvTaxTitle"
             app:layout_constraintTop_toTopOf="@+id/tvTaxTitle" />
-
+<!--
         <TextView
             android:id="@+id/tvAreaTitle"
             android:layout_width="wrap_content"
@@ -216,6 +216,7 @@ tools:context=".person.PersonalInfoFragment">
             android:textSize="20sp"
             app:layout_constraintStart_toEndOf="@+id/tvAreaTitle"
             app:layout_constraintTop_toTopOf="@+id/tvAreaTitle" />
+-->
 
         <TextView
             android:id="@+id/tvInfoTitle"
@@ -223,8 +224,8 @@ tools:context=".person.PersonalInfoFragment">
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="店家簡介："
-            app:layout_constraintStart_toStartOf="@+id/tvAreaTitle"
-            app:layout_constraintTop_toBottomOf="@+id/tvAreaTitle" />
+            app:layout_constraintStart_toStartOf="@+id/tvTaxTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvTaxTitle" />
 
         <TextView
             android:id="@+id/tvShopInfo"

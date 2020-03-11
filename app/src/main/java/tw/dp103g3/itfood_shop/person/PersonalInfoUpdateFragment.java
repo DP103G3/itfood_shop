@@ -102,14 +102,14 @@ public class PersonalInfoUpdateFragment extends Fragment {
         //etShopEmail = view.findViewById(R.id.etShopEmail);
         etShopAddress = view.findViewById(R.id.etShopAddress);
         etShopTax = view.findViewById(R.id.etShopTax);
-        etShopArea = view.findViewById(R.id.etShopArea);
+        //etShopArea = view.findViewById(R.id.etShopArea);
         etShopInfo = view.findViewById(R.id.etShopInfo);
         tvNameWarning = view.findViewById(R.id.tvNameWarning);
         tvPhoneWarning = view.findViewById(R.id.tvPhoneWarning);
         //tvEmailWarning = view.findViewById(R.id.tvEmailWarning);
         tvAddressWarning = view.findViewById(R.id.tvAddressWarning);
         tvTaxWarning = view.findViewById(R.id.tvTaxWarning);
-        tvAreaWarning = view.findViewById(R.id.tvAreaWarning);
+        //tvAreaWarning = view.findViewById(R.id.tvAreaWarning);
         tvInfoWarning = view.findViewById(R.id.tvInfoWarning);
 
 
@@ -334,11 +334,11 @@ public class PersonalInfoUpdateFragment extends Fragment {
         //etShopEmail.setText(shop.getEmail());
         etShopAddress.setText(shop.getAddress());
         etShopTax.setText(shop.getTax());
-        if(String.valueOf(shop.getArea()) != null){
+        /*if(String.valueOf(shop.getArea()) != null){
             etShopArea.setText(String.valueOf(shop.getArea()));
         }else {
             etShopArea.setText("");
-        }
+        }*/
         etShopInfo.setText(shop.getInfo());
     }
 

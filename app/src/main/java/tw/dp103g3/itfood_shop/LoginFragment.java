@@ -63,8 +63,8 @@ public class LoginFragment extends Fragment {
         tvShopInput.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                etEmail.setText("abc@gmail.com");
-                etPassword.setText("987");
+                etEmail.setText(R.string.shopEmailInput);
+                etPassword.setText(R.string.shopPasswordInput);
             }
         });
         etEmail.setOnFocusChangeListener((v, hasFocus) -> {

@@ -9,7 +9,7 @@ tools:context=".dish.AddDishFragment">
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarAddAddress"
@@ -27,8 +27,8 @@ tools:context=".dish.AddDishFragment">
 
     <ImageView
         android:id="@+id/ivDish"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
@@ -173,12 +173,22 @@ tools:context=".dish.AddDishFragment">
         app:layout_constraintEnd_toEndOf="@+id/textPrice"
         app:layout_constraintTop_toBottomOf="@+id/textPrice" />
 
+    <TextView
+        android:id="@+id/tvMemberDataInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorTextOnP"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="right"
+        android:text="餐點資料"
+        app:layout_constraintEnd_toEndOf="@+id/btCancel"
+        app:layout_constraintTop_toBottomOf="@+id/btCancel"/>
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="20dp"
-        app:layout_constraintEnd_toEndOf="@+id/btCancel"
-        app:layout_constraintTop_toBottomOf="@+id/btCancel"/>
+        android:layout_height="100dp"
+        app:layout_constraintEnd_toEndOf="@+id/tvMemberDataInput"
+        app:layout_constraintTop_toBottomOf="@+id/tvMemberDataInput"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

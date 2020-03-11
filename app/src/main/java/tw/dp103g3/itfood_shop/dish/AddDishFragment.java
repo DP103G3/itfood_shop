@@ -53,7 +53,7 @@ public class AddDishFragment extends Fragment {
     private Shop shop;
     private ImageView ivDish;
     private EditText etDishName, etDishInfo, etDishPrice;
-    private TextView tvNameWarning, tvInfoWarning, tvPriceWarning;
+    private TextView tvNameWarning, tvInfoWarning, tvPriceWarning, tvMemberDataInput;
     private Button btTakePicture, btPickPicture, btFinishInsert, btCancel;
     private Uri contentUri, croppedImageUri;
     private byte[] image;
@@ -94,7 +94,7 @@ public class AddDishFragment extends Fragment {
         tvNameWarning = view.findViewById(R.id.tvNameWarning);
         tvInfoWarning = view.findViewById(R.id.tvInfoWarning);
         tvPriceWarning = view.findViewById(R.id.tvPriceWarning);
-
+        tvMemberDataInput = view.findViewById(R.id.tvMemberDataInput);
         toolbarAddAddress = view.findViewById(R.id.toolbarAddAddress);
 
         toolbarAddAddress.setNavigationOnClickListener(v -> Navigation.findNavController(v).popBackStack());
@@ -118,13 +118,17 @@ public class AddDishFragment extends Fragment {
             }
         });
 
-        btPickPicture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        //設定按下文字後輸入預設餐點資料
+        tvMemberDataInput.setOnClickListener(v -> {
+            etDishName.setText(R.string.textDishNameInput);
+            etDishInfo.setText(R.string.textDishInfoInput);
+            etDishPrice.setText(R.string.textDishPriceInput);
+        });
+
+        btPickPicture.setOnClickListener(v ->{
                 Intent intent = new Intent(Intent.ACTION_PICK,
                         MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(intent, REQ_PICK_PICTURE);
-            }
         });
 
         btFinishInsert.setOnClickListener(new View.OnClickListener() {

@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -343,7 +342,7 @@ public class OrderFragment extends Fragment {
                     holder.btAction.setVisibility(View.VISIBLE);
                     holder.btAction.setText(getString(R.string.textComplete));
                     holder.btCancel.setVisibility(View.GONE);
-                    if (del_id == -1 && order.getOrder_type() != 0) {
+                    if ((del_id == -1) && order.getOrder_type() != 0) {
                         holder.btAction.setEnabled(false);
                         holder.btAction.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorBackground, activity.getTheme())));
                     } else {
@@ -378,7 +377,7 @@ public class OrderFragment extends Fragment {
 
             @Override
             public int getItemCount() {
-                return orderDetails.size();
+                return orderDetails.size() + 1;
             }
 
             private class OrderDetailViewHolder extends RecyclerView.ViewHolder {
@@ -402,15 +401,20 @@ public class OrderFragment extends Fragment {
 
             @Override
             public void onBindViewHolder(@NonNull OrderDetailViewHolder holder, int position) {
-                final OrderDetail orderDetail = orderDetails.get(position);
-                Dish dish = orderDetail.getDish();
-                int price = orderDetail.getOd_price();
-                String textDishCount = "x" + orderDetail.getOd_count();
-                holder.tvDishName.setText(dish.getName());
-                holder.tvDishInfo.setText((dish.getInfo() == null || dish.getInfo().isEmpty() ?
-                        "" : dish.getInfo()));
-                holder.tvDishCount.setText(textDishCount);
-                holder.tvDishPrice.setText(decimalFormat.format(price));
+                if (position != orderDetails.size()) {
+                    final OrderDetail orderDetail = orderDetails.get(position);
+                    Dish dish = orderDetail.getDish();
+                    int price = orderDetail.getOd_price();
+                    String textDishCount = "x" + orderDetail.getOd_count();
+                    holder.tvDishName.setText(dish.getName());
+                    holder.tvDishInfo.setText((dish.getInfo() == null || dish.getInfo().isEmpty() ?
+                            "" : dish.getInfo()));
+                    holder.tvDishCount.setText(textDishCount);
+                    holder.tvDishPrice.setText(decimalFormat.format(price));
+                } else {
+                    holder.tvDishName.setText("外送費");
+                    holder.tvDishPrice.setText(decimalFormat.format(70));
+                }
             }
         }
     }

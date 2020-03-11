@@ -142,7 +142,7 @@ public class PersonalInfoFragment extends Fragment {
         tvShopJoinDate.setText(sdFormat.format(jointime));
         tvShopAddress.setText(shopDetail.getAddress());
         tvShopTax.setText(shopDetail.getTax());
-        tvShopArea.setText(String.valueOf(shopDetail.getArea()));
+        //tvShopArea.setText(String.valueOf(shopDetail.getArea()));
         tvShopInfo.setText(shopDetail.getInfo());
 
         btUpdate.setOnClickListener(new View.OnClickListener() {

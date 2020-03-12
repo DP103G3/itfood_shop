@@ -1,21 +1,14 @@
 package tw.dp103g3.itfood_shop.dish;
 
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.FileProvider;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Base64;
@@ -28,6 +21,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -111,7 +114,7 @@ public class AddDishFragment extends Fragment {
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, contentUri);
 
                 if (intent.resolveActivity(activity.getPackageManager()) != null) {
-                    startActivityForResult(intent, REQ_TAKE_PICTURE);
+                    checkPermission(intent);
                 } else {
                     Common.showToast(getActivity(), R.string.textNoCameraApp);
                 }
@@ -189,6 +192,19 @@ public class AddDishFragment extends Fragment {
                 navController.popBackStack();
             }
         });
+    }
+
+    private void checkPermission(Intent intent) {
+        if (ContextCompat.checkSelfPermission(activity, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.CAMERA)) {
+                Common.showToast(activity, R.string.textOpenCameraPermission);
+                ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.CAMERA}, 100);
+            } else {
+                ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.CAMERA}, 100);
+            }
+        } else {
+            startActivityForResult(intent, REQ_TAKE_PICTURE);
+        }
     }
 
     @Override

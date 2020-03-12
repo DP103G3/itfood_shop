@@ -306,4 +306,5 @@ itfood.com.tw的所有權為itfood GmbH。 若您有任何訂餐相關問題，�
     <string name="textDishInfoInput">一份</string>
     <string name="textDishPriceInput">9999</string>
     <string name="textMonthNoOrderFound">當月無訂單資料</string>
+    <string name="textOpenCameraPermission">請開啟相機權限</string>
 </resources>

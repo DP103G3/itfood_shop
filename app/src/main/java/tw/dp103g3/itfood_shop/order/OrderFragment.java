@@ -340,7 +340,7 @@ public class OrderFragment extends Fragment {
                     holder.divider6.setVisibility(View.VISIBLE);
                     holder.divider7.setVisibility(View.VISIBLE);
                     holder.btAction.setVisibility(View.VISIBLE);
-                    holder.btAction.setText(getString(R.string.textComplete));
+                    holder.btAction.setText("製作完成");
                     holder.btCancel.setVisibility(View.GONE);
                     if ((del_id == -1) && order.getOrder_type() != 0) {
                         holder.btAction.setEnabled(false);

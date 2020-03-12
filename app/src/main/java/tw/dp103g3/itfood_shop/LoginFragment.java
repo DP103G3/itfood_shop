@@ -37,7 +37,7 @@ public class LoginFragment extends Fragment {
     private BottomNavigationView bottomNavigationView;
     private EditText etEmail, etPassword;
     private Button btLogin;
-    private TextView tvShopInput;
+    private TextView tvShopInput, tvSiHaiInput;
     private String textEmail, textPassword;
     private CommonTask loginTask;
 
@@ -58,6 +58,7 @@ public class LoginFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         handledViews(view);
         bottomNavigationView.setVisibility(View.GONE);
+        tvSiHaiInput = view.findViewById(R.id.tvSiHaiInput);
         tvShopInput = view.findViewById(R.id.tvShopInput);
         //設定按下文字後輸入預設管理帳號
         tvShopInput.setOnClickListener(new View.OnClickListener() {
@@ -67,6 +68,12 @@ public class LoginFragment extends Fragment {
                 etPassword.setText(R.string.shopPasswordInput);
             }
         });
+
+        tvSiHaiInput.setOnClickListener(v -> {
+            etEmail.setText("sihaizhongyang@gmail.com");
+            etPassword.setText("sihai");
+        });
+
         etEmail.setOnFocusChangeListener((v, hasFocus) -> {
             if (!hasFocus) {
                 textEmail = etEmail.getText().toString().trim().toLowerCase();

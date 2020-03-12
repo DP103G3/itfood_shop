@@ -27,6 +27,8 @@ import com.google.gson.reflect.TypeToken;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import org.java_websocket.exceptions.WebsocketNotConnectedException;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
@@ -231,6 +233,17 @@ public class MainOrderFragment extends Fragment {
             integrator.setOrientationLocked(false);
             integrator.setPrompt(getString(R.string.textPickHint));
             integrator.initiateScan();
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        DeliveryMessage deliveryMessage = new DeliveryMessage("shopConnect", 1, "shop" + Common.getShopId(activity));
+        try {
+            Common.deliveryOrderWebSocketClient.send(Common.gson.toJson(deliveryMessage).toString());
+        } catch (WebsocketNotConnectedException e) {
+            Log.e(TAG, e.toString());
         }
     }
 

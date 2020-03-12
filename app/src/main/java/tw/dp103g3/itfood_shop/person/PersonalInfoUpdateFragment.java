@@ -210,14 +210,14 @@ public class PersonalInfoUpdateFragment extends Fragment {
                 }else{
                     tvTaxWarning.setText("");
                 }
-                String shopArea = etShopArea.getText().toString().trim();
-                if (shopArea.length() <= 0) {
-                    tvAreaWarning.setText("請輸入區域編號！");
-                    Common.showToast(getActivity(), R.string.textShopAreaIsInvalid);
-                    counts++;
-                }else {
-                    tvAreaWarning.setText("");
-                }
+//                String shopArea = etShopArea.getText().toString().trim();
+//                if (shopArea.length() <= 0) {
+//                    tvAreaWarning.setText("請輸入區域編號！");
+//                    Common.showToast(getActivity(), R.string.textShopAreaIsInvalid);
+//                    counts++;
+//                }else {
+//                    tvAreaWarning.setText("");
+//                }
 
                 String shopInfo = etShopInfo.getText().toString().trim();
 
@@ -244,7 +244,7 @@ public class PersonalInfoUpdateFragment extends Fragment {
 
                 if (Common.networkConnected(activity)) {
                     String url = Url.URL + "/ShopServlet";
-                    shopDetail.setFields(shopId, shopName, shopPhone, shopAddress, latitude, longitude, shopTax, Integer.parseInt(shopArea), shopInfo);
+                    shopDetail.setFields(shopId, shopName, shopPhone, shopAddress, latitude, longitude, shopTax, 1, shopInfo);
                     JsonObject jsonObject = new JsonObject();
                     jsonObject.addProperty("action", "update");
                     jsonObject.addProperty("shop", new Gson().toJson(shopDetail));

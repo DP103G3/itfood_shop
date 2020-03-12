@@ -24,8 +24,9 @@
             app:layout_constraintEnd_toEndOf="parent">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="280dp"
+                android:layout_height="80dp"
+                android:scaleType="centerCrop"
                 app:srcCompat="@drawable/logo" />
 
             <TextView
@@ -52,6 +53,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorTextOnP"
+                android:inputType="textEmailAddress"
                 android:hint="@string/textEmail" />
         </com.google.android.material.textfield.TextInputLayout>
 

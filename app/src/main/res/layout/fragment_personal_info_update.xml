@@ -366,15 +366,31 @@ tools:context=".person.PersonalInfoUpdateFragment">
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
-            android:id="@+id/btFinishUpdate"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/linearLayoutButton"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="10dp"
-            android:text="@string/textSend"
+            android:orientation="horizontal"
+            android:gravity="end"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInfo" />
+            app:layout_constraintTop_toBottomOf="@+id/textInfo">
+
+            <Button
+                android:id="@+id/btFinishUpdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/textSend" />
+
+            <Button
+                android:id="@+id/btCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/textCancel" />
+        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -383,7 +399,7 @@ tools:context=".person.PersonalInfoUpdateFragment">
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            app:layout_constraintTop_toBottomOf="@+id/btFinishUpdate" />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutButton" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
 </LinearLayout>
